@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Real-time fuel prices across Germany with price scoring and trend analysis."
+        />
+        <meta name="theme-color" content="#1a73e8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <title>Fuel Watch — Germany</title>
+    </head>
+    <body>
+        <!-- Skip link: first focusable element for keyboard users -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <!-- React root -->
+        <div id="root"></div>
+
+        <!-- Aria-live announcer: invisible, read by screen readers -->
+        <!-- Updated dynamically when search results change -->
+        <div
+            id="aria-announcer"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            class="sr-only"
+        ></div>
+
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
+</html>
