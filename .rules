@@ -107,7 +107,6 @@ offline favorites with push notifications.
 - core/: App-level concerns only (providers, error boundaries, config).
 - workers/: Service worker only. No React code.
 
-## Version Control
 ## Git Conventions
 - Use Conventional Commits: <type>: <short description>
 - Types: feat, fix, refactor, style, docs, chore, test, perf, a11y
