@@ -9,8 +9,6 @@
 import type { Coordinates } from "../types/geo"; // Coordinates shape used throughout the app
 import type { TankerFuelType } from "../types/fuel"; // Tankerkönig fuel type keys
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /**
  * Safe access to Vite environment variables.
  * Cast to a string|undefined record to avoid TS errors when reading unknown keys.
