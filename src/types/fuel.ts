@@ -203,7 +203,7 @@ export interface TankerError {
    */
   message: string;
 
-  /**
+  /**tasarım kısmından çok hoşnut kalmadım
    * Optional numeric code describing the error condition.
    */
   code?: number;
