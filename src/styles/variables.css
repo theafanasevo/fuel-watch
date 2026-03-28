@@ -1,0 +1,160 @@
+:root {
+    /* ── Brand Colors ── */
+    --color-primary: #1a73e8;
+    --color-primary-hover: #1557b0;
+    --color-primary-light: #e8f0fe;
+
+    /* ── Semantic Colors ── */
+    --color-success: #2e7d32;
+    --color-success-light: #e8f5e9;
+    --color-danger: #d32f2f;
+    --color-danger-light: #ffebee;
+    --color-warning: #f9a825;
+    --color-warning-light: #fff8e1;
+
+    /* ── Surface Colors ── */
+    --color-bg: #f5f5f5;
+    --color-surface: #ffffff;
+    --color-surface-hover: #fafafa;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b7280;
+    --color-text-inverse: #ffffff;
+    --color-border: #e0e0e0;
+    --color-border-focus: var(--color-primary);
+    --color-overlay: rgba(0, 0, 0, 0.5);
+
+    /* ── Score Badge Colors ── */
+    --score-great-bg: #e8f5e9;
+    --score-great-text: #1b5e20;
+    --score-great-border: #66bb6a;
+
+    --score-fair-bg: #fff8e1;
+    --score-fair-text: #f57f17;
+    --score-fair-border: #ffca28;
+
+    --score-expensive-bg: #ffebee;
+    --score-expensive-text: #b71c1c;
+    --score-expensive-border: #ef5350;
+
+    /* ── Fuel Type Colors ── */
+    --fuel-e5-color: #43a047;
+    --fuel-e10-color: #1e88e5;
+    --fuel-diesel-color: #6d4c41;
+
+    /* ── Time Window Colors (NEW — Phase 3 analysis) ── */
+    --time-golden-bg: #e8f5e9;
+    --time-golden-text: #1b5e20;
+    --time-golden-border: #66bb6a;
+
+    --time-evening-bg: #e3f2fd;
+    --time-evening-text: #0d47a1;
+    --time-evening-border: #42a5f5;
+
+    --time-morning-bg: #ffebee;
+    --time-morning-text: #b71c1c;
+    --time-morning-border: #ef5350;
+
+    /* ── Trend Chart Colors ── */
+    --trend-bar-fill: var(--color-primary);
+    --trend-bar-bg: var(--color-border);
+    --trend-bar-cheapest: var(--color-success);
+    --trend-bar-expensive: var(--color-danger);
+    --trend-label-color: var(--color-text-muted);
+
+    /* ── Station Card Price Colors (NEW — Phase 4 high-contrast) ── */
+    --price-cheap-color: #1b5e20;
+    --price-cheap-bg: #e8f5e9;
+    --price-peak-color: #b71c1c;
+    --price-peak-bg: #ffebee;
+    --price-normal-color: var(--color-text);
+    --price-normal-bg: transparent;
+
+    /* ── Spacing (4px base scale) ── */
+    --space-2xs: 0.125rem;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* ── Typography ── */
+    --font-family: "Inter", system-ui, -apple-system, sans-serif;
+    --font-family-mono: "Fira Code", "Cascadia Code", monospace;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semi: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+
+    /* ── Borders & Radius ── */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    --border-width: 1px;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-focus: 0 0 0 3px rgba(26, 115, 232, 0.3);
+
+    /* ── Transitions ── */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+    --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ── Layout ── */
+    --max-width: 1200px;
+    --content-width: 800px;
+    --header-height: 64px;
+    --sidebar-width: 320px;
+    --card-min-width: 300px;
+
+    /* ── Z-index Scale ── */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-toast: 500;
+    --z-pwa-banner: 600;
+
+    /* ── PWA Install Banner ── */
+    --pwa-banner-bg: var(--color-primary);
+    --pwa-banner-text: var(--color-text-inverse);
+    --pwa-banner-height: 56px;
+
+    /* ── Notification Toast ── */
+    --toast-success-bg: var(--color-success);
+    --toast-error-bg: var(--color-danger);
+    --toast-info-bg: var(--color-primary);
+    --toast-text: var(--color-text-inverse);
+
+    /* ── Skeleton Loading ── */
+    --skeleton-base: #e0e0e0;
+    --skeleton-shine: #f5f5f5;
+}
