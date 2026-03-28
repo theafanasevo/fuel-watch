@@ -1,0 +1,112 @@
+{
+  "app": {
+    "title": "Fuel Watch",
+    "subtitle": "Echtzeit-Kraftstoffpreise in ganz Deutschland",
+    "footer": "Daten bereitgestellt von Tankerkönig & ADAC. Preise werden alle 5 Minuten aktualisiert."
+  },
+  "search": {
+    "placeholder": "Stadt, PLZ oder Adresse suchen...",
+    "button": "Suchen",
+    "useMyLocation": "Meinen Standort verwenden",
+    "noResults": "Keine Tankstellen in dieser Gegend gefunden.",
+    "expandSearch": "Suchradius erweitern",
+    "radiusLabel": "Suchradius",
+    "radiusKm": "{{radius}} km"
+  },
+  "fuel": {
+    "e5": "Super E5",
+    "e10": "Super E10",
+    "diesel": "Diesel",
+    "allTypes": "Alle Kraftstoffarten",
+    "perLiter": "€/L"
+  },
+  "station": {
+    "open": "Jetzt geöffnet",
+    "closed": "Geschlossen",
+    "distance": "{{distance}} km entfernt",
+    "lastUpdated": "Vor {{time}} aktualisiert",
+    "addFavorite": "Zu Favoriten hinzufügen",
+    "removeFavorite": "Aus Favoriten entfernen",
+    "isFavorite": "Lieblingstankstelle"
+  },
+  "score": {
+    "title": "Preisbewertung",
+    "great": "Super Angebot",
+    "fair": "Fairer Preis",
+    "expensive": "Teuer",
+    "description": "Im Vergleich zum 24h-Gebietsdurchschnitt",
+    "scoreOf": "{{score}} / 100",
+    "savingsNote": "Sie sparen ca. {{amount}} Cent pro Liter"
+  },
+  "analysis": {
+    "goldenHourTitle": "Beste Tankzeit",
+    "goldenHourDesc": "Preise sind typischerweise zwischen 21:00 und 22:00 am niedrigsten. Sie können 12–17 Cent pro Liter sparen.",
+    "eveningWindowTitle": "Unterdurchschnittliches Fenster",
+    "eveningWindowDesc": "Preise liegen von 16:00 bis 22:00 in der Regel unter dem Tagesdurchschnitt.",
+    "morningPeakTitle": "Morgendliche Spitzenwarnung",
+    "morningPeakDesc": "Vermeiden Sie das Tanken zwischen 05:00 und 07:00. Preise sind typischerweise 8+ Cent höher.",
+    "trendTitle": "Wöchentlicher Preistrend",
+    "trendDesc": "Durchschnittspreise nach Wochentag (Quelle: ADAC 2026).",
+    "cheapestDay": "Günstigste Tage: Sonntag & Montag",
+    "today": "Heute",
+    "confidence": "Konfidenz: {{level}}"
+  },
+  "favorites": {
+    "title": "Lieblingstankstellen",
+    "empty": "Noch keine Favoriten. Tippen Sie auf das Herz-Symbol einer Tankstelle.",
+    "clearAll": "Alle Favoriten löschen"
+  },
+  "history": {
+    "title": "Letzte Suchen",
+    "empty": "Keine letzten Suchen.",
+    "clearAll": "Verlauf löschen"
+  },
+  "pwa": {
+    "installTitle": "Fuel Watch installieren",
+    "installDesc": "Zum Startbildschirm hinzufügen für schnellen Zugriff.",
+    "installButton": "Installieren",
+    "dismissButton": "Nicht jetzt",
+    "notificationTitle": "Preisalarme aktivieren",
+    "notificationDesc": "Werden Sie um 21:00 benachrichtigt, wenn Ihre Lieblingstankstellen die günstigste Stunde erreichen.",
+    "notificationAllow": "Benachrichtigungen aktivieren",
+    "notificationDeny": "Nein danke"
+  },
+  "notifications": {
+    "goldenHourHeadline": "Goldene Stunde: Jetzt günstig tanken!",
+    "goldenHourBody": "{{stationName}} hat {{fuelType}} für {{price}}. Jetzt ist die beste Tankzeit (21:00–22:00)."
+  },
+  "errors": {
+    "networkError": "Keine Verbindung. Bitte Internetverbindung prüfen.",
+    "locationDenied": "Standortzugriff verweigert. Bitte manuell suchen.",
+    "apiError": "Kraftstoffpreise konnten nicht geladen werden. Bitte erneut versuchen.",
+    "apiKeyMissing": "API-Schlüssel ist nicht konfiguriert.",
+    "apiThrottled": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+    "unknown": "Etwas ist schiefgelaufen.",
+    "retry": "Erneut versuchen"
+  },
+  "a11y": {
+    "skipToContent": "Zum Hauptinhalt springen",
+    "searchInput": "Stadt, Postleitzahl oder Adresse eingeben, um Tankstellen zu finden",
+    "fuelSelector": "Kraftstoffart auswählen, um Ergebnisse zu filtern",
+    "radiusSelector": "Suchradius in Kilometern auswählen",
+    "languageSwitch": "Sprache wechseln zu {{lang}}",
+    "stationCard": "Tankstelle: {{name}}, {{fuel}} Preis: {{price}}",
+    "priceSpoken": "{{euros}} Euro {{cents}} Cent pro Liter",
+    "scoreBadge": "Preisbewertung: {{score}} von 100, bewertet als {{rating}}",
+    "favoriteToggle": "Favoritenstatus für {{name}} umschalten",
+    "trendChart": "Wöchentliches Preistrenddiagramm mit Durchschnittspreisen pro Tag. Günstigste Tage sind Sonntag und Montag.",
+    "resultsAnnouncement": "{{count}} Tankstellen gefunden. Günstigste: {{price}} Euro.",
+    "noResultsAnnouncement": "Keine Tankstellen in dieser Gegend gefunden.",
+    "closeDialog": "Dialog schließen",
+    "loading": "Ergebnisse werden geladen, bitte warten"
+  },
+  "days": {
+    "mon": "Montag",
+    "tue": "Dienstag",
+    "wed": "Mittwoch",
+    "thu": "Donnerstag",
+    "fri": "Freitag",
+    "sat": "Samstag",
+    "sun": "Sonntag"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "app": {
+    "title": "Fuel Watch",
+    "subtitle": "Real-time fuel prices across Germany",
+    "footer": "Data provided by Tankerkönig & ADAC. Prices update every 5 minutes."
+  },
+  "search": {
+    "placeholder": "Search city, PLZ, or address...",
+    "button": "Search",
+    "useMyLocation": "Use my location",
+    "noResults": "No stations found in this area.",
+    "expandSearch": "Expand search radius",
+    "radiusLabel": "Search radius",
+    "radiusKm": "{{radius}} km"
+  },
+  "fuel": {
+    "e5": "Super E5",
+    "e10": "Super E10",
+    "diesel": "Diesel",
+    "allTypes": "All fuel types",
+    "perLiter": "€/L"
+  },
+  "station": {
+    "open": "Open now",
+    "closed": "Closed",
+    "distance": "{{distance}} km away",
+    "lastUpdated": "Updated {{time}} ago",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from favorites",
+    "isFavorite": "Favorite station"
+  },
+  "score": {
+    "title": "Price Score",
+    "great": "Great deal",
+    "fair": "Fair price",
+    "expensive": "Expensive",
+    "description": "Compared to 24h area average",
+    "scoreOf": "{{score}} / 100",
+    "savingsNote": "You save approximately {{amount}} cents per liter"
+  },
+  "analysis": {
+    "goldenHourTitle": "Best Time to Refuel",
+    "goldenHourDesc": "Prices are typically lowest between 21:00 and 22:00. You can save 12–17 cents per liter.",
+    "eveningWindowTitle": "Below Average Window",
+    "eveningWindowDesc": "Prices are generally below the daily average from 16:00 to 22:00.",
+    "morningPeakTitle": "Morning Peak Warning",
+    "morningPeakDesc": "Avoid refueling between 05:00 and 07:00. Prices are typically 8+ cents higher.",
+    "trendTitle": "Weekly Price Trend",
+    "trendDesc": "Average prices by day of the week (source: ADAC 2026).",
+    "cheapestDay": "Cheapest days: Sunday & Monday",
+    "today": "Today",
+    "confidence": "Confidence: {{level}}"
+  },
+  "favorites": {
+    "title": "Favorite Stations",
+    "empty": "No favorites yet. Tap the heart icon on a station.",
+    "clearAll": "Clear all favorites"
+  },
+  "history": {
+    "title": "Recent Searches",
+    "empty": "No recent searches.",
+    "clearAll": "Clear history"
+  },
+  "pwa": {
+    "installTitle": "Install Fuel Watch",
+    "installDesc": "Add to home screen for quick access.",
+    "installButton": "Install",
+    "dismissButton": "Not now",
+    "notificationTitle": "Enable Price Alerts",
+    "notificationDesc": "Get notified at 21:00 when your favorite stations hit the golden hour.",
+    "notificationAllow": "Enable notifications",
+    "notificationDeny": "No thanks"
+  },
+  "notifications": {
+    "goldenHourHeadline": "Golden Hour: Cheap fuel now!",
+    "goldenHourBody": "{{stationName}} has {{fuelType}} at {{price}}. Best time to fill up is now (21:00–22:00)."
+  },
+  "errors": {
+    "networkError": "Unable to connect. Please check your internet.",
+    "locationDenied": "Location access denied. Please search manually.",
+    "apiError": "Could not load fuel prices. Please try again.",
+    "apiKeyMissing": "API key is not configured.",
+    "apiThrottled": "Too many requests. Please wait a moment and try again.",
+    "unknown": "Something went wrong.",
+    "retry": "Try again"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "searchInput": "Enter a city name, postal code, or address to find nearby stations",
+    "fuelSelector": "Select fuel type to filter results",
+    "radiusSelector": "Select search radius in kilometers",
+    "languageSwitch": "Switch language to {{lang}}",
+    "stationCard": "Fuel station: {{name}}, {{fuel}} price: {{price}}",
+    "priceSpoken": "{{euros}} Euro {{cents}} cents per liter",
+    "scoreBadge": "Price score: {{score}} out of 100, rated {{rating}}",
+    "favoriteToggle": "Toggle favorite status for {{name}}",
+    "trendChart": "Weekly price trend chart showing average prices per day. Cheapest days are Sunday and Monday.",
+    "resultsAnnouncement": "Found {{count}} stations. Cheapest is {{price}} Euro.",
+    "noResultsAnnouncement": "No stations found in this area.",
+    "closeDialog": "Close dialog",
+    "loading": "Loading results, please wait"
+  },
+  "days": {
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday",
+    "sun": "Sunday"
+  }
+}
