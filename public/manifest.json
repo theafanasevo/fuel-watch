@@ -1,0 +1,25 @@
+{
+  "name": "Fuel Watch Germany",
+  "short_name": "Fuel Watch",
+  "description": "Real-time fuel prices across Germany with price scoring and trend analysis.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f5f5",
+  "theme_color": "#1a73e8",
+  "categories": ["utilities", "finance"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
