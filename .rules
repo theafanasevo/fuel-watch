@@ -1,0 +1,250 @@
+# .rules
+
+## Role
+You are a Senior Frontend Engineer and Clean Architecture Specialist.
+
+## Project: Fuel-Watch (Germany)
+A Progressive Web App that displays real-time fuel prices from gas
+stations across Germany. It provides price scoring based on daily
+averages, golden hour analysis, weekly trend data, and supports
+offline favorites with push notifications.
+
+## Tech Stack
+- Vite + React 18 + TypeScript (strict mode)
+- Styling: Modern Vanilla CSS (Custom Properties, Flexbox, Grid)
+  - Tailwind, Bootstrap, or any CSS framework is FORBIDDEN
+  - CSS files must be co-located with their component
+- i18n: No external library. Custom useTranslation hook + JSON files (DE/EN)
+- APIs:
+  - Tankerkönig (fuel prices) — requires API key in .env
+  - Photon / photon.komoot.io (geocoding) — free, no key required
+- State: React Context + useReducer (no Redux, no Zustand)
+- Storage: LocalStorage for favorites and recent searches
+- PWA: Custom service worker + manifest.json
+- Deployment: Cloudflare Pages or Vercel (free tier, HTTPS required)
+- Total cost: 0€
+
+## Project Structure
+
+    src/
+      App.tsx              Root component (layout shell)
+      main.tsx             Entry point (renders into DOM)
+
+      api/                 API clients only. Pure HTTP calls.
+        tankerkoenig.ts      Fuel price API (requires API key)
+        photon.ts            Geocoding API (free, no key)
+
+      core/                App-level infrastructure
+        providers/           Context provider wrappers
+        ErrorBoundary.tsx    Global React error boundary
+        config.ts            Environment variable access
+        sw-register.ts       Service Worker registration logic
+
+      hooks/               Business logic layer
+        useTranslation.ts    i18n with interpolation support
+        useFuelStations.ts   Fetches stations via Tankerkönig
+        useGeolocation.ts    Browser Geolocation API wrapper
+        useGeocode.ts        City/PLZ to coordinates via Photon
+        usePriceAnalysis.ts  Score calculation + golden hour
+        useFavorites.ts      Read/write favorites to LocalStorage
+        useRecentSearches.ts Read/write search history (max 5)
+        useNotification.ts   Browser Push Notification wrapper
+
+      locales/             Translation JSON files
+        en.json              English translations
+        de.json              German translations
+
+      store/               Global state (Context + Reducer)
+        LanguageContext.tsx   Current language state
+        FavoritesContext.tsx  Favorite stations state
+        SearchHistoryContext.tsx  Recent searches state
+
+      styles/              Global CSS system
+        reset.css            Minimal CSS reset
+        variables.css        All design tokens
+        global.css           Typography, layout, a11y utilities
+        animations.css       Keyframe animations
+
+      types/               Shared TypeScript definitions
+        fuel.ts              Station, FuelType, FuelPrice
+        geo.ts               Coordinates, PhotonResult
+        analysis.ts          PriceScore, GoldenHour, TrendData
+        storage.ts           FavoriteStation, RecentSearch
+
+      ui/                  Presentational components only
+        SearchForm/          City/PLZ input + fuel type + radius
+        StationCard/         Station info + price + score badge
+        ScoreBadge/          Visual score indicator
+        Dashboard/           Main results layout
+        TrendChart/          Weekly price trend (pure CSS bars)
+        FuelTypeSelector/    E5 / E10 / Diesel toggle
+        LanguageSwitcher/    DE / EN toggle
+        Spinner/             Loading spinner
+        Skeleton/            Content placeholder during loading
+        ErrorMessage/        User-friendly error display
+        InstallPrompt/       PWA install banner
+
+      utils/               Pure helper functions (no side effects)
+        formatPrice.ts       Number to "1,459 €/L"
+        formatDistance.ts     Meters to "2.3 km"
+        formatTime.ts        Timestamp to relative time string
+        constants.ts         API URLs, defaults, thresholds
+        scoring.ts           Price scoring algorithm
+        goldenHour.ts        Optimal refueling time calculator
+        weeklyTrends.ts      Static weekly data (ADAC source)
+        storage.ts           Type-safe LocalStorage helpers
+
+      workers/             Service Worker
+        sw.ts                Cache strategy + push handler
+
+## Architecture Rules
+- api/: Only HTTP calls and response transformation. No business logic.
+- hooks/: All business logic lives here. Components only call hooks.
+- ui/: Pure rendering. Direct fetch or localStorage calls FORBIDDEN.
+- types/: All shared interfaces and types. The "any" type is FORBIDDEN.
+- utils/: Pure functions. No side effects. Must be unit-testable.
+- store/: React Context + useReducer only. No external state libraries.
+- core/: App-level concerns only (providers, error boundaries, config).
+- workers/: Service worker only. No React code.
+
+## Version Control
+## Git Conventions
+- Use Conventional Commits: <type>: <short description>
+- Types: feat, fix, refactor, style, docs, chore, test, perf, a11y
+- Each commit must represent exactly ONE logical change.
+- Commit messages must be lowercase, max 72 characters.
+- Do not bundle unrelated changes in a single commit.
+- When asked for a commit message, analyze the git diff and suggest
+  the appropriate type and description. If the diff contains multiple
+  unrelated changes, recommend splitting into separate commits.
+
+## Data Flow
+
+    User Action -> ui/ component
+      -> calls hook from hooks/
+        -> hook calls api/ for data
+        -> hook calls utils/ for transformation
+        -> hook updates store/ if needed
+      -> ui/ re-renders with new data
+
+## API Constraints
+
+### Tankerkönig API
+- Polling frequency: MINIMUM 5 minutes between requests.
+- Use list.php for nearby stations or prices.php for known station IDs.
+- API key must come from VITE_TANKER_KEY environment variable.
+- Graceful degradation: If throttled or offline, show user-friendly
+  error message via UI. Never fail silently.
+
+### Photon Geocoder API (photon.komoot.io)
+- Use search-as-you-type pattern for location input.
+- Limit results to 5 per query to respect demo server limits.
+- No API key required.
+- Filter results to Germany only (countrycode=DE parameter).
+
+## Price Analysis Business Logic
+
+### Scoring Algorithm (utils/scoring.ts)
+- Formula: currentPrice - dailyAreaAverage
+- If difference < -0.05 EUR: "Great Deal" (score 80-100)
+- If difference is -0.05 to 0.00 EUR: "Fair Price" (score 50-79)
+- If difference > 0.00 EUR: "Expensive" (score 0-49)
+
+### Golden Hour Analysis (utils/goldenHour.ts)
+- ABSOLUTE CHEAPEST window: 21:00 to 22:00 (saves 12-17 cents)
+- BELOW AVERAGE window: 16:00 to 22:00 (saves 2-4 cents)
+- MOST EXPENSIVE window: 05:00 to 07:00 (morning rush, +8 cents)
+- These windows are based on 2026 ADAC research for Germany.
+
+### Weekly Trends (utils/weeklyTrends.ts)
+- Static dataset based on ADAC 2026 historical analysis.
+- Cheapest days: Sunday and Monday.
+- Data is used in TrendChart component (pure CSS bars, no chart library).
+
+## Semantic HTML & Accessibility Rules
+- Use semantic elements: <nav>, <main>, <article>, <section>, <header>, <footer>.
+- All interactive elements must be keyboard accessible (tabindex, role).
+- ARIA labels must be used for non-semantic elements to provide context.
+- Color contrast must meet WCAG AA standards (4.5:1 for normal text).
+
+### Landmarks (index.html)
+- The document MUST contain: <nav>, <main>, and a hidden <div> with
+  aria-live="polite" for screen reader announcements.
+- A skip-to-content link must be the first focusable element.
+
+### Station Card
+- Each station card MUST use an <article> element, not <div>.
+- Price must be formatted for screen readers as spoken text:
+  "One Euro eighty-one cents" not "1.81".
+- Use aria-label on the <article> with full station context.
+
+### Search Results Announcement
+- When search completes, update the aria-live region with:
+  "Found [N] stations, cheapest is [price] Euro"
+- When no results, announce: "No stations found in this area"
+
+### Focus Management
+- All interactive elements must have visible focus rings.
+- Tab order must be logical: Search -> Filters -> Results -> Favorites.
+- Custom focus styles using box-shadow (not outline) for consistency.
+
+## LocalStorage Rules
+- Favorites: Store array of station ID strings. No size limit.
+- Recent Searches: Store last 5 searches only. FIFO eviction.
+- All storage operations must be wrapped in try-catch (private browsing).
+- Use a version key for storage schema migration.
+
+## Push Notification Rules
+- NEVER request permission on page load.
+- ONLY request after an explicit user gesture (clicking "Notify me").
+- Notification content limits: headline < 50 characters, body < 200 characters.
+- Trigger condition: If current time enters Golden Hour (21:00) AND
+  user has at least one favorited station, fire a local notification
+  with the cheapest price at their favorite station.
+
+## PWA Service Worker Rules
+- Pre-cache all critical assets: CSS, JS bundles, fonts.
+- Network-first strategy for API calls (Tankerkoenig, Photon).
+- Cache-first strategy for static assets (images, CSS, JS).
+- App must load its UI shell even when completely offline.
+
+## Performance Targets (Lighthouse)
+- Performance: 90+
+- Accessibility: 95+
+- Best Practices: 95+
+- SEO: 90+
+- Bundle size: < 150KB gzipped (no heavy dependencies)
+
+## Coding Standards
+- Every function and component must have a JSDoc comment.
+- Components use named exports only (default export FORBIDDEN).
+- Props interface is defined in the same file as its component.
+- CSS class names follow BEM: .station-card__price--cheap
+- Error handling: try-catch with user-friendly messages from locales/.
+- All variable and function names must be in English.
+- File naming: camelCase for utilities, PascalCase for components.
+
+## Component File Pattern
+Each component in ui/ follows this structure:
+
+    ui/
+      StationCard/
+        StationCard.tsx      Component logic
+        StationCard.css      Scoped styles
+        index.ts             Named re-export
+
+## Response Format
+- Add a brief English comment to every code line.
+- When modifying a file, provide the COMPLETE file (partial snippets FORBIDDEN).
+- After each step, suggest the logical "Next step".
+- If a design decision is needed, present options and wait for approval.
+- Keep explanations concise and structured.
+- Always ensure that the code adheres to the defined architecture and rules.
+- When adding new dependencies, justify their necessity and ensure they do not violate the "no heavy dependencies" rule.
+- When asked to "create" or "scaffold" files, provide ONLY
+  shell commands (mkdir/touch). Do NOT generate file contents
+  unless explicitly asked with "write the code for [filename]".
+- When asked to "refactor" or "modify" files, provide the COMPLETE
+  modified file with comments. Do NOT provide diffs or partial snippets.
+- Always maintain the integrity of the project structure and naming conventions.
+- When asked to "explain" a piece of code, provide a concise summary of its purpose and how it fits into the overall architecture. Avoid lengthy explanations or tangential information.
