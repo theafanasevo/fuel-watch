@@ -293,3 +293,58 @@ Each component in ui/ follows this structure:
   modified file with comments. Do NOT provide diffs or partial snippets.
 - Always maintain the integrity of the project structure and naming conventions.
 - When asked to "explain" a piece of code, provide a concise summary of its purpose and how it fits into the overall architecture. Avoid lengthy explanations or tangential information.
+
+## AI Session Management
+- Start a NEW conversation every 3-4 steps to avoid token limits.
+- Every new conversation must begin with:
+  "Read the .rules file for full project context."
+- Do not reference previous conversation history.
+- The .rules file contains all necessary context.
+
+## Development Roadmap
+
+### EPIC 1: Project Infrastructure & Localization
+- Initialize Vite + React + TypeScript project
+- Set up directory structure
+- Configure global CSS variables and reset styles
+- Implement custom useTranslation hook and JSON schema (DE/EN)
+- Configure environment variables (.env) for API keys
+- Add semantic HTML landmarks and aria-live announcer
+- Create README.md with architecture overview
+
+### EPIC 2: Data Services & Business Logic
+- Step 1: TypeScript type definitions (types/)
+- Step 2: Constants and configuration (utils/constants.ts)
+- Step 3: API clients (api/tankerkoenig.ts, api/photon.ts)
+- Step 4: Price scoring algorithm (utils/scoring.ts)
+- Step 5: Golden hour time analysis (utils/goldenHour.ts)
+- Step 6: Weekly trend data (utils/weeklyTrends.ts)
+- Step 7: Formatting utilities (utils/formatPrice, formatDistance, formatTime)
+- Step 8: LocalStorage helpers (utils/storage.ts)
+- Step 9: Business logic hooks (hooks/)
+
+### EPIC 3: UI Components & Accessibility
+- Build SearchForm with filters (fuel type, radius, location)
+- Build StationCard (price, score badge, recommendation)
+- Build Dashboard and result list view
+- Configure ARIA roles and keyboard navigation
+- Build Loading and Error state components
+
+### EPIC 4: State Persistence & PWA
+- Implement Favorite Stations (LocalStorage)
+- Implement Recent Searches and history tracking
+- Configure PWA manifest and service worker
+- Build Browser Push Notification service for price alerts
+
+### EPIC 5: Deployment & Production Audit
+- TypeScript validation and production build
+- Deploy to Cloudflare Pages or Vercel
+- Mobile performance and Lighthouse audit
+
+### Current Progress
+<!-- UPDATE THIS AFTER EACH STEP -->
+- EPIC 1: COMPLETE
+- EPIC 2: Step 5 COMPLETE, Step 6 IN PROGRESS
+- EPIC 3: NOT STARTED
+- EPIC 4: NOT STARTED
+- EPIC 5: NOT STARTED
