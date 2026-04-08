@@ -293,6 +293,7 @@ Each component in ui/ follows this structure:
   modified file with comments. Do NOT provide diffs or partial snippets.
 - Always maintain the integrity of the project structure and naming conventions.
 - When asked to "explain" a piece of code, provide a concise summary of its purpose and how it fits into the overall architecture. Avoid lengthy explanations or tangential information.
+- ALWAYS write code directly to the file, never to the chat. Use the file editing tool to create or modify files. Only use the chat for explanations, questions, or options.
 
 ## AI Session Management
 - Start a NEW conversation every 3-4 steps to avoid token limits.
@@ -344,7 +345,7 @@ Each component in ui/ follows this structure:
 ### Current Progress
 <!-- UPDATE THIS AFTER EACH STEP -->
 - EPIC 1: COMPLETE
-- EPIC 2: Step 5 COMPLETE, Step 6 IN PROGRESS
+- EPIC 2: Step 6 COMPLETE, Step 7 IN PROGRESS
 - EPIC 3: NOT STARTED
 - EPIC 4: NOT STARTED
 - EPIC 5: NOT STARTED
