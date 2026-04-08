@@ -53,6 +53,7 @@ offline favorites with push notifications.
       locales/             Translation JSON files
         en.json              English translations
         de.json              German translations
+        tr.json              Turkish translations
 
       store/               Global state (Context + Reducer)
         LanguageContext.tsx   Current language state
@@ -106,6 +107,51 @@ offline favorites with push notifications.
 - store/: React Context + useReducer only. No external state libraries.
 - core/: App-level concerns only (providers, error boundaries, config).
 - workers/: Service worker only. No React code.
+
+## TypeScript Rules
+- The "any" type is FORBIDDEN in ALL files, not just types/.
+  This includes type assertions. Never use "as any".
+  Use "unknown" with proper type narrowing instead.
+  Wrong:  (body as any).prices
+  Right:  (body as unknown as Record<string, unknown>).prices
+  Right:  if ("prices" in body && Array.isArray(body.prices))
+- Prefer type narrowing and type guards over type assertions.
+- All function parameters and return types must be explicitly typed.
+- No implicit "any" from untyped variables or parameters.
+- Use "readonly" for arrays and objects that should not be mutated.
+- Prefer "interface" for object shapes, "type" for unions and intersections.
+
+## Error Handling Strategy
+- All errors thrown in api/ must use locale-compatible string keys.
+  Example: throw new Error("apiError") — the key maps to locales JSON.
+- hooks/ catch these errors and map them to user-friendly messages
+  using the useTranslation hook.
+- ui/ components never handle errors directly. They receive error
+  state from hooks and render the ErrorMessage component.
+- catch blocks must NOT declare unused error variables.
+  Wrong:  catch (err) { fallback(); }
+  Right:  catch { fallback(); }
+  Only declare the variable if it is used:
+  Right:  catch (err) { logError(err); }
+
+## Import Rules
+- Use relative imports within the same directory or parent.
+  Example: import { Station } from "../types/fuel";
+- Never create circular dependencies between modules.
+  api/ may import from types/ and utils/ only.
+  hooks/ may import from api/, types/, utils/, and store/.
+  ui/ may import from hooks/, types/, and store/.
+  utils/ may import from types/ only.
+  store/ may import from types/ only.
+- Import order in every file (enforced by convention):
+  1. React and third-party imports
+  2. types/ imports
+  3. utils/ imports
+  4. api/ imports (only in hooks/)
+  5. hooks/ imports (only in ui/)
+  6. store/ imports
+  7. CSS imports (only in components)
+  8. Relative imports (same directory)
 
 ## Git Conventions
 - Use Conventional Commits: <type>: <short description>
