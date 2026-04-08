@@ -1,0 +1,112 @@
+{
+  "app": {
+    "title": "Fuel Watch",
+    "subtitle": "Almanya genelinde gerçek zamanlı akaryakıt fiyatları",
+    "footer": "Veriler Tankerkönig ve ADAC tarafından sağlanır. Fiyatlar her 5 dakikada bir güncellenir."
+  },
+  "search": {
+    "placeholder": "Şehir, posta kodu (PLZ) veya adres girin...",
+    "button": "Ara",
+    "useMyLocation": "Konumumu kullan",
+    "noResults": "Bu bölgede istasyon bulunamadı.",
+    "expandSearch": "Arama yarıçapını genişlet",
+    "radiusLabel": "Arama yarıçapı",
+    "radiusKm": "{{radius}} km"
+  },
+  "fuel": {
+    "e5": "Super E5",
+    "e10": "Super E10",
+    "diesel": "Dizel",
+    "allTypes": "Tüm yakıt türleri",
+    "perLiter": "€/L"
+  },
+  "station": {
+    "open": "Şu anda açık",
+    "closed": "Kapalı",
+    "distance": "{{distance}} km uzakta",
+    "lastUpdated": "{{time}} önce güncellendi",
+    "addFavorite": "Favorilere ekle",
+    "removeFavorite": "Favorilerden çıkar",
+    "isFavorite": "Favori istasyon"
+  },
+  "score": {
+    "title": "Fiyat Skoru",
+    "great": "Harika fırsat",
+    "fair": "Makul fiyat",
+    "expensive": "Pahalı",
+    "description": "24 saatlik bölge ortalaması ile karşılaştırma",
+    "scoreOf": "{{score}} / 100",
+    "savingsNote": "Litre başına yaklaşık {{amount}} sent tasarruf edersiniz"
+  },
+  "analysis": {
+    "goldenHourTitle": "Yakıt İçin En İyi Zaman",
+    "goldenHourDesc": "Fiyatlar genellikle 21:00–22:00 arasında en düşük seviyededir. Bu saatlerde litre başına 12–17 sent tasarruf edebilirsiniz.",
+    "eveningWindowTitle": "Ortalamanın Altı Fiyat Penceresi",
+    "eveningWindowDesc": "Fiyatlar genellikle 16:00–22:00 arasında günlük ortalamanın altındadır.",
+    "morningPeakTitle": "Sabah Zirvesi Uyarısı",
+    "morningPeakDesc": "05:00–07:00 arasında yakıt almaktan kaçının. Fiyatlar genellikle 8 sent daha yüksektir.",
+    "trendTitle": "Haftalık Fiyat Eğilimi",
+    "trendDesc": "Günlere göre ortalama fiyatlar (kaynak: ADAC 2026).",
+    "cheapestDay": "En uygun günler: Pazar & Pazartesi",
+    "today": "Bugün",
+    "confidence": "Güven: {{level}}"
+  },
+  "favorites": {
+    "title": "Favori İstasyonlar",
+    "empty": "Henüz favoriniz yok. Bir istasyonun kalp simgesine dokunun.",
+    "clearAll": "Tüm favorileri temizle"
+  },
+  "history": {
+    "title": "Son Aramalar",
+    "empty": "Kayıtlı arama yok.",
+    "clearAll": "Geçmişi temizle"
+  },
+  "pwa": {
+    "installTitle": "Fuel Watch'ı Yükle",
+    "installDesc": "Hızlı erişim için ana ekrana ekleyin.",
+    "installButton": "Yükle",
+    "dismissButton": "Şimdi değil",
+    "notificationTitle": "Fiyat Uyarılarını Etkinleştir",
+    "notificationDesc": "Favori istasyonlarınız altın saate ulaştığında (21:00) bildirim alın.",
+    "notificationAllow": "Bildirimleri etkinleştir",
+    "notificationDeny": "Hayır, teşekkürler"
+  },
+  "notifications": {
+    "goldenHourHeadline": "Altın Saat: Şimdi uygun yakıt zamanı!",
+    "goldenHourBody": "{{stationName}} için {{fuelType}} fiyatı {{price}}. Depoyu doldurmak için şimdi en uygun zaman (21:00–22:00)."
+  },
+  "errors": {
+    "networkError": "Bağlantı kurulamadı. Lütfen internet bağlantınızı kontrol edin.",
+    "locationDenied": "Konum erişimi reddedildi. Lütfen manuel arama yapın.",
+    "apiError": "Yakıt fiyatları yüklenemedi. Lütfen tekrar deneyin.",
+    "apiKeyMissing": "API anahtarı yapılandırılmamış.",
+    "apiThrottled": "Çok fazla istek yapıldı. Lütfen biraz bekleyip tekrar deneyin.",
+    "unknown": "Üzgünüz. Bir şeyler ters gitti.",
+    "retry": "Tekrar dene"
+  },
+  "a11y": {
+    "skipToContent": "Ana içeriğe atla",
+    "searchInput": "Yakındaki istasyonları bulmak için şehir, posta kodu veya adres girin",
+    "fuelSelector": "Sonuçları filtrelemek için yakıt türünü seçin",
+    "radiusSelector": "Arama yarıçapını kilometre cinsinden seçin",
+    "languageSwitch": "Dili {{lang}} olarak değiştir",
+    "stationCard": "Yakıt istasyonu: {{name}}, {{fuel}} fiyatı: {{price}}",
+    "priceSpoken": "Litre başına {{euros}} Euro {{cents}} sent",
+    "scoreBadge": "Fiyat puanı: 100 üzerinden {{score}}, yani {{rating}} olarak değerlendirildi",
+    "favoriteToggle": "{{name}} için favori durumunu değiştir",
+    "trendChart": "Haftalık fiyat eğilimi grafiği; günlük ortalama fiyatları gösterir. En uygun günler Pazar ve Pazartesi.",
+    "resultsAnnouncement": "{{count}} istasyon bulundu. En ucuz fiyat: {{price}} Euro.",
+    "noResultsAnnouncement": "Bu bölgede istasyon bulunamadı.",
+    "closeDialog": "Pencereyi kapat",
+    "loading": "Sonuçlar yükleniyor, lütfen bekleyin"
+  },
+  "days": {
+    "mon": "Pazartesi",
+    "tue": "Salı",
+    "wed": "Çarşamba",
+    "thu": "Perşembe",
+    "fri": "Cuma",
+    "sat": "Cumartesi",
+    "sun": "Pazar"
+  }
+}
