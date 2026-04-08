@@ -322,7 +322,8 @@ Each component in ui/ follows this structure:
 - Step 6: Weekly trend data (utils/weeklyTrends.ts)
 - Step 7: Formatting utilities (utils/formatPrice, formatDistance, formatTime)
 - Step 8: LocalStorage helpers (utils/storage.ts)
-- Step 9: Business logic hooks (hooks/)
+- Step 9a: Business logic hooks (useGeolocation, useGeocode, useFuelStations)
+- Step 9b: Business logic hooks (usePriceAnalysis, useFavorites, useRecentSearches)
 
 ### EPIC 3: UI Components & Accessibility
 - Build SearchForm with filters (fuel type, radius, location)
@@ -345,7 +346,7 @@ Each component in ui/ follows this structure:
 ### Current Progress
 <!-- UPDATE THIS AFTER EACH STEP -->
 - EPIC 1: COMPLETE
-- EPIC 2: Step 6 COMPLETE, Step 7 IN PROGRESS
+- EPIC 2: Step 8 COMPLETE, Step 9a IN PROGRESS
 - EPIC 3: NOT STARTED
 - EPIC 4: NOT STARTED
 - EPIC 5: NOT STARTED
