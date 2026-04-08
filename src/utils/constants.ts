@@ -17,26 +17,26 @@ const ENV = import.meta.env as unknown as Record<string, string | undefined>;
 
 /**
  * Base URL for the Tankerkönig API used for `list.php` and `prices.php`.
- * See: https://creativecommons.tankerkoenig.de/swagger/
+ * Example: https://creativecommons.tankerkoenig.de/json
  */
 export const TANKERKOENIG_API_URL: string =
   ENV.VITE_TANKER_URL ?? "https://creativecommons.tankerkoenig.de/json";
 
 /**
  * Base URL for the Photon geocoding API (photon.komoot.io).
- * See: https://photon.komoot.io
+ * Example: https://photon.komoot.io/api
  */
 export const PHOTON_API_URL: string =
   ENV.VITE_PHOTON_URL ?? "https://photon.komoot.io/api";
 
 /**
  * Default coordinates used when no user location is available.
- * Can be configured via `VITE_DEFAULT_COORDS` environment variable as `lat,lon`.
- * Fallback is Berlin (52.5200, 13.4050).
+ * - Reads `VITE_DEFAULT_COORDS` as `lat,lon` if present
+ * - Falls back to Berlin (52.52, 13.405)
  */
 export const DEFAULT_COORDS: Coordinates = (() => {
   const raw = ENV.VITE_DEFAULT_COORDS;
-  if (raw) {
+  if (typeof raw === "string" && raw.trim() !== "") {
     const parts = raw.split(",").map((p) => p.trim());
     if (parts.length >= 2) {
       const lat = Number(parts[0]);
@@ -46,14 +46,14 @@ export const DEFAULT_COORDS: Coordinates = (() => {
       }
     }
   }
+
   // Berlin fallback
   return { lat: 52.52, lon: 13.405 };
 })();
 
 /**
- * Default search radius (in kilometers).
- * Can be configured via `VITE_DEFAULT_RADIUS` environment variable.
- * Fallback is 10 (kilometers).
+ * Default search radius in kilometers.
+ * Read from VITE_DEFAULT_RADIUS (number in km) or fallback to 10 km.
  */
 export const DEFAULT_RADIUS: number = (() => {
   const raw = ENV.VITE_DEFAULT_RADIUS;
@@ -68,17 +68,15 @@ export const DEFAULT_RADIUS_METERS = Math.round(DEFAULT_RADIUS * 1000);
 
 /**
  * Default fuel type used when none is selected.
- * Can be configured via `VITE_DEFAULT_FUEL_TYPE` environment variable.
- * Fallback is `"e5"`.
+ * Read from VITE_DEFAULT_FUEL_TYPE or fallback to 'e5'.
  */
 export const DEFAULT_FUEL_TYPE: TankerFuelType =
   ((ENV.VITE_DEFAULT_FUEL_TYPE as TankerFuelType | undefined) ??
     "e5") as TankerFuelType;
 
 /**
- * Fuel types exposed to the UI.
- * Each entry uses a key that matches the locales JSON keys under `fuel`.
- * Label keys should be resolved via the translation function (e.g. `t('fuel.e5')`).
+ * Fuel types supported by the UI. Each entry maps a fuel key to a locale label key
+ * that can be resolved via the translation files (e.g. 'fuel.e5').
  */
 export const FUEL_TYPES: Array<{ key: TankerFuelType; labelKey: string }> = [
   { key: "e5", labelKey: "fuel.e5" },
@@ -87,32 +85,28 @@ export const FUEL_TYPES: Array<{ key: TankerFuelType; labelKey: string }> = [
 ];
 
 /**
- * Radius options (in kilometers) presented to the user.
+ * Radius picker options (in kilometers) presented to the user.
  */
 export const RADIUS_OPTIONS: number[] = [5, 10, 15, 25, 50];
 
 /**
  * Minimum polling interval enforced for the Tankerkönig API, in milliseconds.
- * 5 minutes = 300_000 ms
+ * Tankerkönig requires at least 5 minutes between requests.
  */
-export const MIN_POLLING_INTERVAL_MS = 5 * 60 * 1000;
+export const MIN_POLLING_INTERVAL_MS: number = 5 * 60 * 1000; // 300000 ms
 
 /**
- * Maximum number of results to request from Photon per query.
+ * Maximum number of results to request from Photon for search-as-you-type.
  */
 export const PHOTON_MAX_RESULTS = 5;
 
 /**
- * Thresholds used to classify pricing differences (currentPrice - areaAverage).
- * Values are expressed in Euros.
- *
- * - If difference < greatDeal -> great deal
- * - If difference between greatDeal and fair -> fair
- * - If difference > fair -> expensive
+ * Scoring thresholds used to map price differences to human categories.
+ * Difference is computed as (currentPrice - dailyAreaAverage) in EUR.
  */
 export const SCORE_THRESHOLDS = {
   greatDeal: -0.05, // difference < -0.05 EUR => Great Deal
-  fair: 0.0, // difference >= -0.05 and <= 0.00 => Fair Price
+  fair: 0.0, // difference between -0.05 and 0.00 => Fair Price
 } as const;
 
 /**
@@ -126,7 +120,26 @@ export const TIME_WINDOWS = {
 } as const;
 
 /**
- * LocalStorage key names used in the application.
+ * Observation thresholds for deriving observed savings from user data.
+ *
+ * Two forms are exported:
+ * - OBSERVATION_THRESHOLDS grouped object for contextual imports
+ * - MIN_OBSERVATIONS and HIGH_CONFIDENCE_THRESHOLD named constants for direct use
+ *
+ * Defaults:
+ * - MIN_OBSERVATIONS: 7 (minimum data points to use observed data)
+ * - HIGH_CONFIDENCE_THRESHOLD: 20 (data points for 'high' confidence)
+ */
+export const MIN_OBSERVATIONS = 7; // minimum observations to consider observed data
+export const HIGH_CONFIDENCE_THRESHOLD = 20; // observations required for 'high' confidence
+
+export const OBSERVATION_THRESHOLDS = {
+  MIN_OBSERVATIONS_MEDIUM: MIN_OBSERVATIONS,
+  MIN_OBSERVATIONS_HIGH: HIGH_CONFIDENCE_THRESHOLD,
+} as const;
+
+/**
+ * LocalStorage key names used by the application.
  * Keep keys versioned so migrations and clearing are straightforward.
  */
 export const STORAGE_KEYS = {
@@ -137,7 +150,7 @@ export const STORAGE_KEYS = {
 } as const;
 
 /**
- * Storage schema version string. Update when the persisted schema changes.
+ * Storage schema version identifier. Update when persisted schema changes.
  */
 export const STORAGE_VERSION = ENV.VITE_STORAGE_VERSION ?? "v1";
 
@@ -153,7 +166,7 @@ export const MAX_RECENT_SEARCHES = (() => {
 })();
 
 /**
- * Notification content limits to ensure concise messages.
+ * Notification content limits enforced by the application.
  */
 export const NOTIFICATION_LIMITS = {
   maxHeadlineLength: Number(ENV.VITE_NOTIFICATION_HEADLINE_MAX ?? 50),
@@ -161,7 +174,7 @@ export const NOTIFICATION_LIMITS = {
 } as const;
 
 /**
- * Expose a small helper with defaults useful for tests and runtime checks.
+ * Defaults object for convenience in tests and runtime checks.
  */
 export const defaults = {
   tankerUrl: TANKERKOENIG_API_URL,
@@ -173,4 +186,6 @@ export const defaults = {
   minPollingMs: MIN_POLLING_INTERVAL_MS,
   photonMaxResults: PHOTON_MAX_RESULTS,
   storageVersion: STORAGE_VERSION,
+  minObservations: MIN_OBSERVATIONS,
+  highConfidenceThreshold: HIGH_CONFIDENCE_THRESHOLD,
 };
