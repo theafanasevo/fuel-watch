@@ -151,8 +151,13 @@ export const STORAGE_KEYS = {
 
 /**
  * Storage schema version identifier. Update when persisted schema changes.
+ * Always a number.
  */
-export const STORAGE_VERSION = ENV.VITE_STORAGE_VERSION ?? "v1";
+export const STORAGE_VERSION: number = (() => {
+  const raw = ENV.VITE_STORAGE_VERSION;
+  const parsed = raw ? Number(raw) : NaN;
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 1;
+})();
 
 /**
  * Maximum number of recent searches to keep in LocalStorage.
