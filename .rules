@@ -53,6 +53,7 @@ offline favorites with push notifications.
       locales/             Translation JSON files
         en.json              English translations
         de.json              German translations
+        tr.json              Turkish translations
 
       store/               Global state (Context + Reducer)
         LanguageContext.tsx   Current language state
@@ -107,7 +108,51 @@ offline favorites with push notifications.
 - core/: App-level concerns only (providers, error boundaries, config).
 - workers/: Service worker only. No React code.
 
-## Version Control
+## TypeScript Rules
+- The "any" type is FORBIDDEN in ALL files, not just types/.
+  This includes type assertions. Never use "as any".
+  Use "unknown" with proper type narrowing instead.
+  Wrong:  (body as any).prices
+  Right:  (body as unknown as Record<string, unknown>).prices
+  Right:  if ("prices" in body && Array.isArray(body.prices))
+- Prefer type narrowing and type guards over type assertions.
+- All function parameters and return types must be explicitly typed.
+- No implicit "any" from untyped variables or parameters.
+- Use "readonly" for arrays and objects that should not be mutated.
+- Prefer "interface" for object shapes, "type" for unions and intersections.
+
+## Error Handling Strategy
+- All errors thrown in api/ must use locale-compatible string keys.
+  Example: throw new Error("apiError") — the key maps to locales JSON.
+- hooks/ catch these errors and map them to user-friendly messages
+  using the useTranslation hook.
+- ui/ components never handle errors directly. They receive error
+  state from hooks and render the ErrorMessage component.
+- catch blocks must NOT declare unused error variables.
+  Wrong:  catch (err) { fallback(); }
+  Right:  catch { fallback(); }
+  Only declare the variable if it is used:
+  Right:  catch (err) { logError(err); }
+
+## Import Rules
+- Use relative imports within the same directory or parent.
+  Example: import { Station } from "../types/fuel";
+- Never create circular dependencies between modules.
+  api/ may import from types/ and utils/ only.
+  hooks/ may import from api/, types/, utils/, and store/.
+  ui/ may import from hooks/, types/, and store/.
+  utils/ may import from types/ only.
+  store/ may import from types/ only.
+- Import order in every file (enforced by convention):
+  1. React and third-party imports
+  2. types/ imports
+  3. utils/ imports
+  4. api/ imports (only in hooks/)
+  5. hooks/ imports (only in ui/)
+  6. store/ imports
+  7. CSS imports (only in components)
+  8. Relative imports (same directory)
+
 ## Git Conventions
 - Use Conventional Commits: <type>: <short description>
 - Types: feat, fix, refactor, style, docs, chore, test, perf, a11y
@@ -248,3 +293,60 @@ Each component in ui/ follows this structure:
   modified file with comments. Do NOT provide diffs or partial snippets.
 - Always maintain the integrity of the project structure and naming conventions.
 - When asked to "explain" a piece of code, provide a concise summary of its purpose and how it fits into the overall architecture. Avoid lengthy explanations or tangential information.
+- ALWAYS write code directly to the file, never to the chat. Use the file editing tool to create or modify files. Only use the chat for explanations, questions, or options.
+
+## AI Session Management
+- Start a NEW conversation every 3-4 steps to avoid token limits.
+- Every new conversation must begin with:
+  "Read the .rules file for full project context."
+- Do not reference previous conversation history.
+- The .rules file contains all necessary context.
+
+## Development Roadmap
+
+### EPIC 1: Project Infrastructure & Localization
+- Initialize Vite + React + TypeScript project
+- Set up directory structure
+- Configure global CSS variables and reset styles
+- Implement custom useTranslation hook and JSON schema (DE/EN)
+- Configure environment variables (.env) for API keys
+- Add semantic HTML landmarks and aria-live announcer
+- Create README.md with architecture overview
+
+### EPIC 2: Data Services & Business Logic
+- Step 1: TypeScript type definitions (types/)
+- Step 2: Constants and configuration (utils/constants.ts)
+- Step 3: API clients (api/tankerkoenig.ts, api/photon.ts)
+- Step 4: Price scoring algorithm (utils/scoring.ts)
+- Step 5: Golden hour time analysis (utils/goldenHour.ts)
+- Step 6: Weekly trend data (utils/weeklyTrends.ts)
+- Step 7: Formatting utilities (utils/formatPrice, formatDistance, formatTime)
+- Step 8: LocalStorage helpers (utils/storage.ts)
+- Step 9a: Business logic hooks (useGeolocation, useGeocode, useFuelStations)
+- Step 9b: Business logic hooks (usePriceAnalysis, useFavorites, useRecentSearches)
+
+### EPIC 3: UI Components & Accessibility
+- Build SearchForm with filters (fuel type, radius, location)
+- Build StationCard (price, score badge, recommendation)
+- Build Dashboard and result list view
+- Configure ARIA roles and keyboard navigation
+- Build Loading and Error state components
+
+### EPIC 4: State Persistence & PWA
+- Implement Favorite Stations (LocalStorage)
+- Implement Recent Searches and history tracking
+- Configure PWA manifest and service worker
+- Build Browser Push Notification service for price alerts
+
+### EPIC 5: Deployment & Production Audit
+- TypeScript validation and production build
+- Deploy to Cloudflare Pages or Vercel
+- Mobile performance and Lighthouse audit
+
+### Current Progress
+<!-- UPDATE THIS AFTER EACH STEP -->
+- EPIC 1: COMPLETE
+- EPIC 2: Step 9a COMPLETE, Step 9b IN PROGRESS
+- EPIC 3: NOT STARTED
+- EPIC 4: NOT STARTED
+- EPIC 5: NOT STARTED

@@ -199,7 +199,7 @@ export interface TankerPricesResponse {
  */
 export interface TankerError {
   /**
-   * Human readable message describing the error.
+   * Human-readable message describing the error.
    */
   message: string;
 

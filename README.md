@@ -30,7 +30,7 @@ golden hour analysis, and weekly trend insights. Built with React, TypeScript, a
 | State          | React Context + useReducer          |
 | Persistence    | LocalStorage                        |
 | PWA            | Custom Service Worker + manifest    |
-| Deployment     | Vercel / Cloudflare Pages           |
+| Deployment     | Cloudflare Pages                    |
 
 > **No CSS frameworks. No state libraries. No i18n libraries.**
 > Every abstraction is hand-built to demonstrate core competency.
