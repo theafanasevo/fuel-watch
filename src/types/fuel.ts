@@ -199,11 +199,11 @@ export interface TankerPricesResponse {
  */
 export interface TankerError {
   /**
-   * Human readable message describing the error.
+   * Human-readable message describing the error.
    */
   message: string;
 
-  /**tasarım kısmından çok hoşnut kalmadım
+  /**
    * Optional numeric code describing the error condition.
    */
   code?: number;
