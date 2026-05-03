@@ -5,6 +5,8 @@
     "footer": "Daten bereitgestellt von Tankerkönig & ADAC. Preise werden alle 5 Minuten aktualisiert."
   },
   "search": {
+    "locationLabel": "Stadt oder PLZ",
+    "suggestionsLabel": "Vorschläge",
     "placeholder": "Stadt, PLZ oder Adresse suchen...",
     "button": "Suchen",
     "useMyLocation": "Meinen Standort verwenden",

@@ -5,6 +5,8 @@
     "footer": "Data provided by Tankerkönig & ADAC. Prices update every 5 minutes."
   },
   "search": {
+    "locationLabel": "City or postal code",
+    "suggestionsLabel": "Suggestions",
     "placeholder": "Search city, PLZ, or address...",
     "button": "Search",
     "useMyLocation": "Use my location",

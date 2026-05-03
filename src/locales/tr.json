@@ -5,6 +5,8 @@
     "footer": "Veriler Tankerkönig ve ADAC tarafından sağlanır. Fiyatlar her 5 dakikada bir güncellenir."
   },
   "search": {
+    "locationLabel": "Şehir veya posta kodu",
+    "suggestionsLabel": "Öneriler",
     "placeholder": "Şehir, posta kodu (PLZ) veya adres girin...",
     "button": "Ara",
     "useMyLocation": "Konumumu kullan",
