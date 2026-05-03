@@ -1,0 +1,51 @@
+/* ── Skeleton Component ── */
+
+.skeleton-wrapper {
+    display: flex; /* Flex layout for line stacking */
+    flex-direction: column; /* Stack lines vertically */
+    gap: var(--space-sm); /* 8px gap between lines */
+    width: 100%; /* Fill available width */
+}
+
+/* ── Base Block ── */
+
+.skeleton-block {
+    /* Inherits shimmer animation from global .skeleton class */
+    width: 100%; /* Full width by default */
+}
+
+/* ── Text Variant ── */
+
+.skeleton-block--text {
+    height: var(--font-size-base); /* 16px matches body text */
+    border-radius: var(--radius-sm); /* 4px subtle rounding */
+}
+
+/* Last text line is shorter for realism */
+.skeleton-block--text:last-child:not(:first-child) {
+    width: 75%; /* Shorter last line */
+}
+
+/* ── Title Variant ── */
+
+.skeleton-block--title {
+    height: var(--font-size-xl); /* 24px matches heading size */
+    width: 60%; /* Title typically shorter */
+    border-radius: var(--radius-sm); /* 4px subtle rounding */
+}
+
+/* ── Card Variant ── */
+
+.skeleton-block--card {
+    height: 120px; /* Card placeholder height */
+    border-radius: var(--radius-lg); /* 12px matches card radius */
+    box-shadow: var(--shadow-sm); /* Subtle card shadow */
+}
+
+/* ── Circle Variant ── */
+
+.skeleton-block--circle {
+    width: var(--space-2xl); /* 48px diameter */
+    height: var(--space-2xl); /* 48px diameter */
+    border-radius: var(--radius-full); /* Perfect circle */
+}

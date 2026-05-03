@@ -1,0 +1,24 @@
+/* ── ThemeSwitcher Component ── */
+
+.theme-switcher {
+    display: flex; /* Center icon */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    width: var(--button-height-sm); /* 40px square */
+    height: var(--button-height-sm); /* 40px square */
+    background: none; /* Transparent background */
+    border: none; /* No border */
+    border-radius: var(--radius-full); /* Circle shape */
+    cursor: pointer; /* Pointer cursor */
+    font-size: var(--font-size-lg); /* 20px icon size */
+    transition: background-color var(--transition-fast); /* Smooth hover */
+}
+
+.theme-switcher:hover {
+    background-color: var(--color-surface-hover); /* Subtle hover background */
+}
+
+.theme-switcher:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}

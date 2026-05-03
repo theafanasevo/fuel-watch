@@ -1,0 +1,59 @@
+/* ── ErrorMessage Component ── */
+
+.error-message {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    gap: var(--space-md); /* 16px between elements */
+    padding: var(--space-xl); /* 32px internal padding */
+    background-color: var(--color-danger-light); /* Light danger background */
+    border: var(--border-width) solid var(--color-danger); /* Danger border */
+    border-radius: var(--radius-lg); /* 12px card radius */
+    text-align: center; /* Center text */
+    max-width: var(--content-width); /* Constrain width */
+    margin: var(--space-xl) auto; /* Center with vertical spacing */
+}
+
+/* ── Title ── */
+
+.error-message__title {
+    font-size: var(--font-size-lg); /* 20px heading size */
+    font-weight: var(--font-weight-semi); /* Semi-bold weight */
+    color: var(--color-danger-contrast); /* High contrast danger text */
+    line-height: var(--line-height-tight); /* 1.25 tight line height */
+    margin: 0; /* Reset default heading margin */
+}
+
+/* ── Body ── */
+
+.error-message__body {
+    font-size: var(--font-size-base); /* 16px body text */
+    color: var(--color-danger-contrast); /* High contrast danger text */
+    line-height: var(--line-height-normal); /* 1.5 normal line height */
+    margin: 0; /* Reset default paragraph margin */
+}
+
+/* ── Action Button ── */
+
+.error-message__action {
+    height: var(--button-height-md); /* 48px standard button height */
+    padding: 0 var(--space-lg); /* 24px horizontal padding */
+    font-size: var(--font-size-base); /* 16px button text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-primary-contrast); /* White text on primary bg */
+    background-color: var(--color-primary); /* Primary brand color */
+    border: none; /* No border for primary button */
+    border-radius: var(--radius-md); /* 8px button radius */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color var(--transition-fast); /* Smooth hover transition */
+}
+
+.error-message__action:hover {
+    background-color: var(--color-primary-hover); /* Darker primary on hover */
+}
+
+.error-message__action:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring from design tokens */
+    outline: none; /* Remove default outline, use box-shadow instead */
+}

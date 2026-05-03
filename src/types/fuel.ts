@@ -9,13 +9,13 @@
 /**
  * Allowed fuel type keys as returned by the Tankerkönig API.
  */
-export type TankerFuelType = "e5" | "e10" | "diesel";
+export type FuelType = "e5" | "e10" | "diesel";
 
 /**
  * Minimal mapping of fuel type keys to a price in EUR per liter.
  * Price values are numbers when available or null when not provided.
  */
-export type TankerPriceMap = Record<TankerFuelType, number | null>;
+export type TankerPriceMap = Record<FuelType, number | null>;
 
 /**
  * A single station entry as returned by the Tankerkönig `list.php` endpoint.

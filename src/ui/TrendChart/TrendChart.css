@@ -1,0 +1,147 @@
+/* ── TrendChart Component ── */
+
+.trend-chart {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack header, chart, footer */
+    gap: var(--space-md); /* 16px between sections */
+    padding: var(--space-lg); /* 24px internal padding */
+    background-color: var(--color-surface); /* Card surface */
+    border: var(--border-width) solid var(--color-border); /* Subtle border */
+    border-radius: var(--radius-lg); /* 12px card radius */
+    box-shadow: var(--shadow-sm); /* Default card shadow */
+}
+
+/* ── Header ── */
+
+.trend-chart__header {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack title + description */
+    gap: var(--space-xs); /* 4px gap */
+}
+
+.trend-chart__title {
+    font-size: var(--font-size-lg); /* 20px heading */
+    font-weight: var(--font-weight-semi); /* Semi-bold */
+    color: var(--color-text); /* Primary text */
+    margin: 0; /* Reset margin */
+}
+
+.trend-chart__desc {
+    font-size: var(--font-size-sm); /* 14px description */
+    color: var(--color-text-secondary); /* Muted text */
+    margin: 0; /* Reset margin */
+}
+
+/* ── Chart Container ── */
+
+.trend-chart__chart {
+    display: flex; /* Horizontal bar layout */
+    align-items: flex-end; /* Bars grow upward */
+    justify-content: space-between; /* Even spacing */
+    gap: var(--space-sm); /* 8px gap between columns */
+    height: 160px; /* Fixed chart height */
+    padding-top: var(--space-lg); /* 24px space for offset labels */
+}
+
+/* ── Column (one day) ── */
+
+.trend-chart__column {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack offset, bar, label */
+    align-items: center; /* Center horizontally */
+    gap: var(--space-xs); /* 4px gap */
+    flex: 1; /* Equal width columns */
+    min-width: 0; /* Allow shrinking */
+}
+
+.trend-chart__column--today {
+    position: relative; /* Anchor for today badge */
+}
+
+/* ── Offset Label ── */
+
+.trend-chart__offset {
+    font-size: var(--font-size-xs); /* 12px small text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    font-variant-numeric: var(--font-variant-price); /* Tabular nums */
+    color: var(--color-text-muted); /* Muted color */
+    white-space: nowrap; /* Prevent wrap */
+}
+
+/* ── Bar Container ── */
+
+.trend-chart__bar-container {
+    width: 100%; /* Full column width */
+    height: 100px; /* Fixed bar area height */
+    display: flex; /* Flex for alignment */
+    align-items: flex-end; /* Bars grow upward */
+    justify-content: center; /* Center bar */
+}
+
+/* ── Bar ── */
+
+.trend-chart__bar {
+    width: 70%; /* Bar width relative to column */
+    max-width: 40px; /* Max bar width */
+    background-color: var(--trend-bar-fill); /* Default bar color */
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0; /* Rounded top corners */
+    transition: height var(--transition-base); /* Smooth height animation */
+}
+
+.trend-chart__bar--cheapest {
+    background-color: var(--trend-bar-cheapest); /* Green for cheapest */
+}
+
+.trend-chart__bar--expensive {
+    background-color: var(--trend-bar-expensive); /* Red for most expensive */
+}
+
+/* ── Day Label ── */
+
+.trend-chart__day-label {
+    font-size: var(--font-size-xs); /* 12px label */
+    font-weight: var(--font-weight-normal); /* Normal weight */
+    color: var(--trend-label-color); /* Trend label color */
+    text-align: center; /* Center text */
+    white-space: nowrap; /* Prevent wrap */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Ellipsis for long names */
+    max-width: 100%; /* Constrain to column */
+}
+
+/* ── Today Badge ── */
+
+.trend-chart__today-badge {
+    font-size: var(--font-size-xs); /* 12px text */
+    font-weight: var(--font-weight-semi); /* Semi-bold */
+    color: var(--color-primary-contrast); /* White text */
+    background-color: var(--color-primary); /* Primary background */
+    padding: var(--space-2xs) var(--space-xs); /* 2px 4px padding */
+    border-radius: var(--radius-full); /* Pill shape */
+    white-space: nowrap; /* Prevent wrap */
+}
+
+/* ── Footnote ── */
+
+.trend-chart__footnote {
+    font-size: var(--font-size-sm); /* 14px text */
+    color: var(--color-text-secondary); /* Muted text */
+    text-align: center; /* Center footnote */
+    margin: 0; /* Reset margin */
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+    .trend-chart__chart {
+        gap: var(--space-xs); /* 4px tighter gap on mobile */
+    }
+
+    .trend-chart__day-label {
+        font-size: 0.625rem; /* 10px smaller on mobile */
+    }
+
+    .trend-chart__today-badge {
+        font-size: 0.625rem; /* 10px smaller on mobile */
+    }
+}

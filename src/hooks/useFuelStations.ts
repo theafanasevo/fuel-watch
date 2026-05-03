@@ -6,7 +6,7 @@
  */
 
 import { useState, useRef, useCallback } from "react";
-import type { TankerStation, TankerFuelType } from "../types/fuel";
+import type { TankerStation, FuelType } from "../types/fuel";
 import { fetchNearbyStations } from "../api/tankerkoenig";
 import { MIN_POLLING_INTERVAL_MS } from "../utils/constants";
 
@@ -22,7 +22,7 @@ export interface UseFuelStationsResult {
     lat: number,
     lng: number,
     radius: number,
-    fuelType: TankerFuelType,
+    fuelType: FuelType,
   ) => void;
   refreshPrices: () => void;
 }
@@ -45,7 +45,7 @@ export function useFuelStations(): UseFuelStationsResult {
     lat: number;
     lng: number;
     radius: number;
-    fuelType: TankerFuelType;
+    fuelType: FuelType;
   } | null>(null);
 
   // Store last fetch timestamp for polling enforcement
@@ -56,7 +56,7 @@ export function useFuelStations(): UseFuelStationsResult {
    * Enforces minimum polling interval.
    */
   const fetchStations = useCallback(
-    (lat: number, lng: number, radius: number, fuelType: TankerFuelType) => {
+    (lat: number, lng: number, radius: number, fuelType: FuelType) => {
       const now = Date.now();
       if (
         lastFetchTime.current &&

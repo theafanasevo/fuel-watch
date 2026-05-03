@@ -1,0 +1,171 @@
+/* ── Dashboard Component ── */
+
+.dashboard {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack sections vertically */
+    gap: var(--space-2xl); /* 48px between sections */
+    max-width: var(--content-width); /* Constrain to content width */
+    margin: 0 auto; /* Center horizontally */
+    padding: var(--space-lg); /* 24px page padding */
+}
+
+/* ── Search Section ── */
+
+.dashboard__search {
+    width: 100%; /* Full width */
+}
+
+/* ── Golden Hour Banner ── */
+
+.dashboard__golden-hour {
+    padding: var(--space-lg); /* 24px padding */
+    background: linear-gradient(
+        135deg,
+        var(--time-golden-bg),
+        var(--time-evening-bg)
+    ); /* Gradient background from time tokens */
+    border: var(--border-width) solid var(--time-golden-border); /* Golden border */
+    border-radius: var(--radius-lg); /* 12px radius */
+}
+
+.dashboard__golden-hour-content {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack title + desc */
+    gap: var(--space-xs); /* 4px gap */
+}
+
+.dashboard__golden-hour-title {
+    font-size: var(--font-size-xl); /* 24px heading */
+    font-weight: var(--font-weight-bold); /* Bold */
+    color: var(--time-golden-text); /* Golden text color */
+    margin: 0; /* Reset margin */
+}
+
+.dashboard__golden-hour-desc {
+    font-size: var(--font-size-base); /* 16px text */
+    color: var(--time-golden-text); /* Golden text color */
+    margin: 0; /* Reset margin */
+    line-height: var(--line-height-normal); /* 1.5 line height */
+}
+
+/* ── Today Tip ── */
+
+.dashboard__today-tip {
+    padding: var(--space-md); /* 16px padding */
+    background-color: var(--color-success-light); /* Light success bg */
+    border: var(--border-width) solid var(--color-success); /* Success border */
+    border-radius: var(--radius-lg); /* 12px radius */
+    text-align: center; /* Center text */
+}
+
+.dashboard__today-tip-text {
+    font-size: var(--font-size-base); /* 16px text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    color: var(--color-success-contrast); /* Success contrast text */
+    margin: 0; /* Reset margin */
+}
+
+/* ── Loading ── */
+
+.dashboard__loading {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack spinner + skeletons */
+    align-items: center; /* Center horizontally */
+    gap: var(--space-lg); /* 24px gap */
+    padding: var(--space-xl); /* 32px padding */
+}
+
+.dashboard__skeletons {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack skeletons */
+    gap: var(--space-md); /* 16px gap */
+    width: 100%; /* Full width */
+}
+
+/* ── Results ── */
+
+.dashboard__results {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack header + grid */
+    gap: var(--space-lg); /* 24px gap */
+}
+
+.dashboard__results-title {
+    font-size: var(--font-size-base); /* 16px text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    color: var(--color-text-secondary); /* Secondary text */
+    margin: 0; /* Reset margin */
+}
+
+/* ── Station Cards Grid ── */
+
+.dashboard__stations-grid {
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(var(--card-min-width), 1fr)
+    ); /* Responsive columns */
+    gap: var(--space-lg); /* 24px grid gap */
+}
+
+/* ── Empty State ── */
+
+.dashboard__empty {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack text + button */
+    align-items: center; /* Center horizontally */
+    gap: var(--space-md); /* 16px gap */
+    padding: var(--space-2xl); /* 48px padding */
+}
+
+.dashboard__empty-text {
+    font-size: var(--font-size-lg); /* 20px text */
+    color: var(--color-text-secondary); /* Muted text */
+    text-align: center; /* Center text */
+    margin: 0; /* Reset margin */
+}
+
+.dashboard__expand-button {
+    height: var(--button-height-md); /* 48px button */
+    padding: 0 var(--space-lg); /* 24px horizontal padding */
+    font-size: var(--font-size-base); /* 16px text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-primary); /* Primary text */
+    background-color: transparent; /* Ghost button */
+    border: var(--border-width) solid var(--color-primary); /* Primary border */
+    border-radius: var(--radius-md); /* 8px radius */
+    cursor: pointer; /* Pointer cursor */
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast); /* Smooth hover */
+}
+
+.dashboard__expand-button:hover {
+    background-color: var(--color-primary); /* Filled on hover */
+    color: var(--color-primary-contrast); /* White text on hover */
+}
+
+.dashboard__expand-button:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}
+
+/* ── Trends Section ── */
+
+.dashboard__trends {
+    width: 100%; /* Full width */
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+    .dashboard {
+        padding: var(--space-md); /* 16px padding on mobile */
+        gap: var(--space-xl); /* 32px gap on mobile */
+    }
+
+    .dashboard__stations-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}

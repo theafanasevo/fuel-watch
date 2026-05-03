@@ -1,0 +1,49 @@
+/* ── Spinner Component ── */
+
+.spinner {
+    display: inline-flex; /* Inline layout for flexible placement */
+    align-items: center; /* Center spinner vertically */
+    justify-content: center; /* Center spinner horizontally */
+}
+
+/* ── Spinner Circle ── */
+
+.spinner__circle {
+    border-radius: var(--radius-full); /* Perfect circle */
+    border-style: solid; /* Solid border for spinner arc */
+    border-color: var(--color-border); /* Track color from design tokens */
+    border-top-color: var(
+        --color-primary
+    ); /* Active arc color from design tokens */
+    animation: spin 0.8s linear infinite; /* Reuse global spin keyframe */
+}
+
+/* ── Size Variants ── */
+
+.spinner--sm .spinner__circle {
+    width: var(--icon-size-sm); /* 16px */
+    height: var(--icon-size-sm); /* 16px */
+    border-width: 2px; /* Thinner border for small size */
+}
+
+.spinner--md .spinner__circle {
+    width: var(--icon-size-md); /* 24px */
+    height: var(--icon-size-md); /* 24px */
+    border-width: 3px; /* Medium border width */
+}
+
+.spinner--lg .spinner__circle {
+    width: var(--icon-size-lg); /* 32px */
+    height: var(--icon-size-lg); /* 32px */
+    border-width: 4px; /* Thicker border for large size */
+}
+
+/* ── Reduced Motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner__circle {
+        animation: none; /* Disable animation per user preference */
+        border-top-color: var(--color-primary); /* Keep visual indicator */
+        opacity: 0.7; /* Subtle static indicator */
+    }
+}

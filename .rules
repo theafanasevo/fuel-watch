@@ -40,15 +40,17 @@ offline favorites with push notifications.
         config.ts            Environment variable access
         sw-register.ts       Service Worker registration logic
 
-      hooks/               Business logic layer
+      hooks/               Business logic + state access hooks
+        useLanguage.ts       Consumes LanguageContext (language, setLanguage)
+        useFavorites.ts      Consumes FavoritesContext (add, remove, check)
+        useSearchHistory.ts  Consumes SearchHistoryContext (add, clear)
         useTranslation.ts    i18n with interpolation support
         useFuelStations.ts   Fetches stations via Tankerkönig
         useGeolocation.ts    Browser Geolocation API wrapper
         useGeocode.ts        City/PLZ to coordinates via Photon
         usePriceAnalysis.ts  Score calculation + golden hour
-        useFavorites.ts      Read/write favorites to LocalStorage
-        useRecentSearches.ts Read/write search history (max 5)
         useNotification.ts   Browser Push Notification wrapper
+        useSearchHistory.ts  Consumes SearchHistoryContext (add, clear)
 
       locales/             Translation JSON files
         en.json              English translations
@@ -56,9 +58,15 @@ offline favorites with push notifications.
         tr.json              Turkish translations
 
       store/               Global state (Context + Reducer)
-        LanguageContext.tsx   Current language state
-        FavoritesContext.tsx  Favorite stations state
-        SearchHistoryContext.tsx  Recent searches state
+        LanguageContext.ts       Context object and types (no component)
+        LanguageProvider.tsx     Provider component + reducer
+        FavoritesContext.ts      Context object and types (no component)
+        FavoritesProvider.tsx    Provider component + reducer
+        SearchHistoryContext.ts  Context object and types (no component)
+        SearchHistoryProvider.tsx Provider component + reducer
+        NOTE: Store files MUST separate context objects (.ts) from
+              provider components (.tsx) to prevent Vite fast refresh warnings.
+              Hooks that consume these contexts live in hooks/.
 
       styles/              Global CSS system
         reset.css            Minimal CSS reset
@@ -100,13 +108,54 @@ offline favorites with push notifications.
 
 ## Architecture Rules
 - api/: Only HTTP calls and response transformation. No business logic.
-- hooks/: All business logic lives here. Components only call hooks.
+- hooks/: All business logic and hooks live here. Components only call hooks.
 - ui/: Pure rendering. Direct fetch or localStorage calls FORBIDDEN.
 - types/: All shared interfaces and types. The "any" type is FORBIDDEN.
 - utils/: Pure functions. No side effects. Must be unit-testable.
-- store/: React Context + useReducer only. No external state libraries.
+- store/: React Context + useReducer only. No external state libraries. No hooks.
 - core/: App-level concerns only (providers, error boundaries, config).
 - workers/: Service worker only. No React code.
+
+## Design System
+
+### Brand Identity
+- Personality: Trustworthy, clear, modern, decision-first
+- Tone: Friendly but professional. Not corporate, not casual.
+- Theme: "Green Savings" — eco-conscious, trust-building teal/green palette.
+
+### Theme System
+- Light and Dark mode supported via data-theme attribute on <html>.
+- Default: Follow system preference (prefers-color-scheme).
+- User can override via ThemeSwitcher component.
+- Theme preference saved to localStorage.
+- All colors MUST use CSS custom properties from variables.css.
+  Hardcoded color values in components are FORBIDDEN.
+
+### Typography
+- Font: Inter (Google Fonts)
+- Prices MUST use font-variant-numeric: tabular-nums for alignment.
+- Hierarchy: h1 (2xl), h2 (xl), h3 (lg), body (base), small (sm)
+
+### Icons
+- Library: lucide-react (tree-shakeable, ~200 bytes per icon)
+- Default size: 24px (--icon-size-md)
+- Always pair with aria-hidden="true" and sr-only text alternative
+- Import individually: import { Search } from "lucide-react"
+  Never import the entire library.
+
+### Component Design Rules
+- Cards: 12px radius, shadow-sm default, shadow-md on hover
+- Buttons: Primary (filled), Secondary (outlined), Ghost (text only)
+- Button heights: 40px (sm), 48px (md), 56px (lg)
+- Inputs: 48px height, 1px border, focus ring via box-shadow
+- Score badges: Pill shape (radius-full), semantic background colors
+- Recommendation card: Full-width, gradient background, top of screen
+
+### Spacing
+- Use design tokens exclusively: --space-xs through --space-3xl
+- Component internal padding: --space-md (16px)
+- Grid gap: --space-lg (24px)
+- Section spacing: --space-2xl (48px)
 
 ## TypeScript Rules
 - The "any" type is FORBIDDEN in ALL files, not just types/.
@@ -135,6 +184,8 @@ offline favorites with push notifications.
   Right:  catch (err) { logError(err); }
 
 ## Import Rules
+- Always check if the imported property actually exists on the module!
+- Use only exported properties from modules. Do not invent new names for imported items.
 - Use relative imports within the same directory or parent.
   Example: import { Station } from "../types/fuel";
 - Never create circular dependencies between modules.
@@ -152,6 +203,12 @@ offline favorites with push notifications.
   6. store/ imports
   7. CSS imports (only in components)
   8. Relative imports (same directory)
+- When verbatimModuleSyntax is enabled, all type-only imports
+  MUST use "import type" syntax to avoid TS 1484 errors.
+  Wrong:  import { TankerFuelType } from "../types/fuel";
+  Right:  import type { TankerFuelType } from "../types/fuel";
+  For mixed imports, use inline type modifier:
+  Right:  import { fn, type TankerFuelType } from "../types/fuel";
 
 ## Git Conventions
 - Use Conventional Commits: <type>: <short description>
@@ -302,6 +359,14 @@ Each component in ui/ follows this structure:
 - Do not reference previous conversation history.
 - The .rules file contains all necessary context.
 
+## Agent Efficiency Rules
+- Prefer small, scoped tasks over large multi-step requests.
+- Modify only the files explicitly listed by the user.
+- Do not scan the entire repository unless asked.
+- Do not proceed to the next roadmap step without approval.
+- Write changes directly to files when code changes are requested.
+- Keep responses short: summarize changed files and important notes only.
+
 ## Development Roadmap
 
 ### EPIC 1: Project Infrastructure & Localization
@@ -345,8 +410,8 @@ Each component in ui/ follows this structure:
 
 ### Current Progress
 <!-- UPDATE THIS AFTER EACH STEP -->
-- EPIC 1: COMPLETE
-- EPIC 2: Step 9a COMPLETE, Step 9b IN PROGRESS
-- EPIC 3: NOT STARTED
-- EPIC 4: NOT STARTED
+- EPIC 1: COMPLETED
+- EPIC 2: COMPLETED
+- EPIC 3: COMPLETED
+- EPIC 4: IN PROGRESS
 - EPIC 5: NOT STARTED

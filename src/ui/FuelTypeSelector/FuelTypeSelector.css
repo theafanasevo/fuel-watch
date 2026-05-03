@@ -1,0 +1,76 @@
+/* ── FuelTypeSelector Component ── */
+
+.fuel-type-selector {
+    display: inline-flex; /* Inline horizontal layout */
+    gap: var(--space-2xs); /* 2px tight gap */
+    background-color: var(
+        --color-surface-hover
+    ); /* Subtle container background */
+    border-radius: var(--radius-full); /* Pill shape container */
+    padding: var(--space-2xs); /* 2px internal padding */
+    border: none; /* Remove fieldset border */
+    margin: 0; /* Reset fieldset margin */
+}
+
+/* ── Button ── */
+
+.fuel-type-selector__button {
+    display: inline-flex; /* Flex for dot + label alignment */
+    align-items: center; /* Center vertically */
+    gap: var(--space-xs); /* 4px gap between dot and label */
+    height: var(--button-height-sm); /* 40px button height */
+    padding: 0 var(--space-md); /* 16px horizontal padding */
+    font-size: var(--font-size-sm); /* 14px text size */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-text-secondary); /* Muted text for inactive */
+    background-color: transparent; /* No background for inactive */
+    border: none; /* No border */
+    border-radius: var(--radius-full); /* Pill shape */
+    cursor: pointer; /* Pointer on hover */
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast); /* Smooth transitions */
+}
+
+.fuel-type-selector__button:hover {
+    color: var(--color-text); /* Full contrast on hover */
+    background-color: var(--color-surface-active); /* Subtle hover background */
+}
+
+/* ── Active State ── */
+
+.fuel-type-selector__button--active {
+    color: var(--color-primary-contrast); /* White text on primary */
+    background-color: var(--color-primary); /* Primary brand background */
+    font-weight: var(--font-weight-semi); /* Semi-bold for active */
+}
+
+.fuel-type-selector__button--active:hover {
+    background-color: var(--color-primary-hover); /* Darker on hover */
+    color: var(--color-primary-contrast); /* Keep white text */
+}
+
+/* ── Color Dot ── */
+
+.fuel-type-selector__dot {
+    width: var(--space-sm); /* 8px dot size */
+    height: var(--space-sm); /* 8px dot size */
+    border-radius: var(--radius-full); /* Perfect circle */
+    flex-shrink: 0; /* Prevent dot from shrinking */
+}
+
+/* Hide dot color when active (white text + colored dot is messy) */
+.fuel-type-selector__button--active .fuel-type-selector__dot {
+    background-color: var(
+        --color-primary-contrast
+    ) !important; /* White dot on active */
+    opacity: 0.7; /* Slightly transparent */
+}
+
+/* ── Focus ── */
+
+.fuel-type-selector__button:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring from tokens */
+    outline: none; /* Remove default outline */
+}
