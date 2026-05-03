@@ -1,0 +1,54 @@
+/* ── LanguageSwitcher Component ── */
+
+.language-switcher {
+    display: inline-flex; /* Inline horizontal layout */
+    gap: var(--space-2xs); /* 2px tight gap between buttons */
+    background-color: var(
+        --color-surface-hover
+    ); /* Subtle container background */
+    border-radius: var(--radius-full); /* Pill shape container */
+    padding: var(--space-2xs); /* 2px internal padding */
+}
+
+/* ── Button ── */
+
+.language-switcher__button {
+    height: var(--button-height-sm); /* 40px button height */
+    padding: 0 var(--space-md); /* 16px horizontal padding */
+    font-size: var(--font-size-sm); /* 14px text size */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-text-secondary); /* Muted text for inactive */
+    background-color: transparent; /* No background for inactive */
+    border: none; /* No border */
+    border-radius: var(--radius-full); /* Pill shape */
+    cursor: pointer; /* Pointer on hover */
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast); /* Smooth transitions */
+}
+
+.language-switcher__button:hover {
+    color: var(--color-text); /* Full contrast on hover */
+    background-color: var(--color-surface-active); /* Subtle hover background */
+}
+
+/* ── Active State ── */
+
+.language-switcher__button--active {
+    color: var(--color-primary-contrast); /* White text on primary */
+    background-color: var(--color-primary); /* Primary brand background */
+    font-weight: var(--font-weight-semi); /* Semi-bold for active */
+}
+
+.language-switcher__button--active:hover {
+    background-color: var(--color-primary-hover); /* Darker primary on hover */
+    color: var(--color-primary-contrast); /* Keep white text */
+}
+
+/* ── Focus ── */
+
+.language-switcher__button:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring from tokens */
+    outline: none; /* Remove default outline */
+}

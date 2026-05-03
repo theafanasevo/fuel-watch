@@ -1,0 +1,186 @@
+/* ── SearchForm Component ── */
+
+.search-form {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack fields vertically */
+    gap: var(--space-lg); /* 24px between fields */
+    padding: var(--space-lg); /* 24px internal padding */
+    background-color: var(--color-surface); /* Card surface color */
+    border-radius: var(--radius-lg); /* 12px card radius */
+    box-shadow: var(--shadow-sm); /* Subtle card shadow */
+    max-width: var(--content-width); /* Constrain width */
+    width: 100%; /* Fill available space */
+}
+
+/* ── Field Container ── */
+
+.search-form__field {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack label + input */
+    gap: var(--space-xs); /* 4px gap */
+    position: relative; /* Position anchor for suggestions */
+}
+
+/* ── Label ── */
+
+.search-form__label {
+    font-size: var(--font-size-sm); /* 14px label text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    color: var(--color-text-secondary); /* Muted label color */
+}
+
+/* ── Input Wrapper ── */
+
+.search-form__input-wrapper {
+    position: relative; /* Anchor for spinner overlay */
+    display: flex; /* Flex layout */
+    align-items: center; /* Center spinner vertically */
+}
+
+/* ── Input ── */
+
+.search-form__input {
+    width: 100%; /* Full width */
+    height: var(--input-height); /* 48px input height */
+    padding: 0 var(--space-md); /* 16px horizontal padding */
+    font-size: var(--font-size-base); /* 16px text */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-text); /* Primary text color */
+    background-color: var(--color-surface); /* Surface background */
+    border: var(--border-width) solid var(--color-border); /* Standard border */
+    border-radius: var(--radius-md); /* 8px radius */
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast); /* Smooth focus transition */
+}
+
+.search-form__input::placeholder {
+    color: var(--color-text-muted); /* Muted placeholder text */
+}
+
+.search-form__input:focus {
+    border-color: var(--color-border-focus); /* Primary border on focus */
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}
+
+/* ── Input Spinner ── */
+
+.search-form__input-spinner {
+    position: absolute; /* Overlay inside input */
+    right: var(--space-md); /* 16px from right edge */
+    pointer-events: none; /* Don't block input interaction */
+}
+
+/* ── Suggestions Dropdown ── */
+
+.search-form__suggestions {
+    position: absolute; /* Float below input */
+    top: 100%; /* Position below field */
+    left: 0; /* Align to left edge */
+    right: 0; /* Stretch to right edge */
+    z-index: var(--z-dropdown); /* Above content, below modals */
+    margin: var(--space-xs) 0 0; /* 4px gap from input */
+    padding: var(--space-xs); /* 4px internal padding */
+    list-style: none; /* Remove bullet points */
+    background-color: var(--color-surface-elevated); /* Elevated surface */
+    border: var(--border-width) solid var(--color-border); /* Subtle border */
+    border-radius: var(--radius-md); /* 8px radius */
+    box-shadow: var(--shadow-md); /* Dropdown shadow */
+}
+
+/* ── Suggestion Item ── */
+
+.search-form__suggestion {
+    padding: var(--space-sm) var(--space-md); /* 8px 16px padding */
+    font-size: var(--font-size-base); /* 16px text */
+    color: var(--color-text); /* Primary text color */
+    border-radius: var(--radius-sm); /* 4px subtle rounding */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color var(--transition-fast); /* Smooth hover */
+}
+
+.search-form__suggestion:hover,
+.search-form__suggestion:focus {
+    background-color: var(--color-surface-hover); /* Highlight on hover/focus */
+    outline: none; /* Remove default focus outline */
+}
+
+/* ── Error Text ── */
+
+.search-form__error {
+    font-size: var(--font-size-sm); /* 14px error text */
+    color: var(--color-danger); /* Danger color */
+    margin: 0; /* Reset margin */
+}
+
+/* ── Selected Location Badge ── */
+
+.search-form__selected {
+    font-size: var(--font-size-sm); /* 14px text */
+    color: var(--color-success-contrast); /* Success text color */
+    background-color: var(--color-success-light); /* Light success background */
+    padding: var(--space-xs) var(--space-sm); /* 4px 8px padding */
+    border-radius: var(--radius-full); /* Pill shape */
+    margin: 0; /* Reset margin */
+    display: inline-block; /* Inline for badge appearance */
+}
+
+/* ── Select (Radius) ── */
+
+.search-form__select {
+    width: 100%; /* Full width */
+    height: var(--input-height); /* 48px height */
+    padding: 0 var(--space-md); /* 16px horizontal padding */
+    font-size: var(--font-size-base); /* 16px text */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-text); /* Primary text color */
+    background-color: var(--color-surface); /* Surface background */
+    border: var(--border-width) solid var(--color-border); /* Standard border */
+    border-radius: var(--radius-md); /* 8px radius */
+    cursor: pointer; /* Pointer cursor */
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast); /* Smooth focus */
+    appearance: none; /* Remove native select styling */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23616161' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); /* Custom dropdown arrow */
+    background-repeat: no-repeat; /* Single arrow */
+    background-position: right var(--space-md) center; /* Position arrow right */
+    padding-right: var(--space-2xl); /* Space for arrow */
+}
+
+.search-form__select:focus {
+    border-color: var(--color-border-focus); /* Primary border on focus */
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}
+
+/* ── Submit Button ── */
+
+.search-form__submit {
+    width: 100%; /* Full width button */
+    height: var(--button-height-lg); /* 56px large button */
+    font-size: var(--font-size-base); /* 16px text */
+    font-weight: var(--font-weight-semi); /* Semi-bold */
+    font-family: var(--font-family); /* Design system font */
+    color: var(--color-primary-contrast); /* White text */
+    background-color: var(--color-primary); /* Primary background */
+    border: none; /* No border */
+    border-radius: var(--radius-md); /* 8px radius */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color var(--transition-fast); /* Smooth hover */
+}
+
+.search-form__submit:hover:not(:disabled) {
+    background-color: var(--color-primary-hover); /* Darker on hover */
+}
+
+.search-form__submit:disabled {
+    opacity: 0.5; /* Dimmed when disabled */
+    cursor: not-allowed; /* Not-allowed cursor */
+}
+
+.search-form__submit:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}
