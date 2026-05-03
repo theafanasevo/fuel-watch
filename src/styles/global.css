@@ -114,6 +114,13 @@ small {
     font-size: var(--font-size-sm);
 }
 
+/* ── Header Actions ── */
+.app__header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
 /* ── Station Grid ── */
 .station-grid {
     display: grid;

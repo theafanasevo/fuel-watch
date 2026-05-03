@@ -1,101 +1,81 @@
-import React, { useState } from "react"; // React and hooks
-import { useTranslation } from "./hooks/useTranslation"; // custom i18n hook
+/**
+ * App component.
+ * Root layout shell with semantic HTML landmarks,
+ * ErrorBoundary wrapper, AppProviders for global state,
+ * and main Dashboard view.
+ */
 
-export function App(): JSX.Element {
-  const { t, lang, toggleLanguage } = useTranslation(); // translator, current language and toggler
+import type { ReactNode } from "react"; // ReactNode type
+import { useTranslation } from "./hooks/useTranslation"; // Translation hook
+import { ErrorBoundary } from "./core/ErrorBoundary"; // Global error boundary
+import { AppProviders } from "./core/providers/AppProviders"; // Context providers wrapper
+import { ErrorMessage } from "./ui/ErrorMessage"; // Error display component
+import { Dashboard } from "./ui/Dashboard"; // Main dashboard view
+import { LanguageSwitcher } from "./ui/LanguageSwitcher"; // Language toggle
+import { ThemeSwitcher } from "./ui/ThemeSwitcher"; // Theme toggle
 
-  // The translation hook returns top-level groups (app, search, etc).
-  // Cast to any for convenient nested access in the UI.
-  const app = t("app") as any;
-  const search = t("search") as any;
-  const a11y = (t("a11y") || {}) as any;
-
-  const [query, setQuery] = useState("");
+/**
+ * Inner app content that uses hooks (must be inside providers).
+ * Separated because hooks require provider context.
+ * @returns The app layout with header, main, and footer.
+ */
+function AppContent(): ReactNode {
+  const { t } = useTranslation(); // Get translation function
 
   return (
-    <div
-      style={{
-        backgroundColor: "var(--bg-color)",
-        color: "var(--text-color)",
-        minHeight: "100vh",
-        padding: "var(--space-lg)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "var(--space-md)",
-      }}
-    >
-      <header>
-        <h1>{app?.title ?? "Fuel Watch"}</h1>
-        <p>{app?.subtitle ?? "Real-time fuel prices across Germany"}</p>
-      </header>
-
-      <section aria-labelledby="search-heading">
-        <h2 id="search-heading" className="sr-only">
-          {a11y?.searchInput ?? "Search"}
-        </h2>
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            // Demonstration only: show the query in the console
-            // Real behavior: would trigger geocode/search hook
-            // eslint-disable-next-line no-console
-            console.log("Search query:", query);
-          }}
-          style={{
-            display: "flex",
-            gap: "var(--space-sm)",
-            alignItems: "center",
-          }}
-        >
-          <label htmlFor="q" className="sr-only">
-            {a11y?.searchInput ?? "Search input"}
-          </label>
-          <input
-            id="q"
-            name="q"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={
-              search?.placeholder ?? "Search city, PLZ or address..."
-            }
-            aria-label={a11y?.searchInput ?? "Search"}
-            style={{ padding: "var(--space-sm)", flex: 1 }}
-          />
-          <button type="submit" aria-label={search?.button ?? "Search"}>
-            {search?.button ?? "Search"}
-          </button>
-        </form>
-      </section>
-
-      <aside>
-        <p>
-          {app?.footer ?? ""}{" "}
-          {/* show small footer/credits from translations if present */}
-        </p>
-      </aside>
-
-      <footer
-        style={{
-          marginTop: "auto",
-          display: "flex",
-          gap: "var(--space-sm)",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <strong>{lang.toUpperCase()}</strong>
+    <div className="app">
+      {" "}
+      {/* Layout shell from global.css */}
+      {/* Skip link as first focusable element for a11y */}
+      <a href="#main-content" className="skip-link">
+        {t("a11y.skipToContent")}
+      </a>
+      {/* App header landmark — uses global .app__header styles */}
+      <header className="app__header">
+        <h1>{t("app.title")}</h1> {/* App name */}
+        <div className="app__header-actions">
+          {" "}
+          {/* Header action buttons */}
+          <ThemeSwitcher /> {/* Dark/light mode toggle */}
+          <LanguageSwitcher /> {/* Language toggle */}
         </div>
-        <button
-          onClick={toggleLanguage}
-          aria-label={a11y?.languageSwitch?.replace(
-            "{{lang}}",
-            lang === "de" ? "Deutsch" : "English",
-          )}
-        >
-          {lang === "de" ? "Deutsch" : "English"}
-        </button>
+      </header>
+      {/* Main content landmark — uses global .app__main styles */}
+      <main id="main-content" className="app__main">
+        <Dashboard /> {/* Main dashboard view */}
+      </main>
+      {/* App footer — uses global .app__footer styles */}
+      <footer className="app__footer">
+        <p>{t("app.footer")}</p> {/* Footer text */}
       </footer>
+      {/* Screen reader announcements region */}
+      <div aria-live="polite" className="sr-only" />
     </div>
+  );
+}
+
+/**
+ * Root application component.
+ * Wraps everything in ErrorBoundary and AppProviders.
+ * ErrorBoundary fallback uses static strings because
+ * translation hook is not available outside providers.
+ * @returns The complete application.
+ */
+export function App(): ReactNode {
+  return (
+    <ErrorBoundary
+      fallback={(errorKey, reset) => (
+        <ErrorMessage
+          title="Fuel-Watch" // Static fallback — no i18n outside providers
+          message={errorKey} // Error key as message
+          actionLabel="Retry" // Static fallback button
+          onAction={reset} // Reset error state
+        />
+      )}
+    >
+      <AppProviders>
+        <AppContent /> {/* App content inside providers */}
+      </AppProviders>
+    </ErrorBoundary>
   );
 }
