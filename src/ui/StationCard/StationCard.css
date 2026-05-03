@@ -1,0 +1,169 @@
+/* ── StationCard Component ── */
+
+.station-card {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack sections vertically */
+    gap: var(--space-md); /* 16px between sections */
+    padding: var(--space-md); /* 16px internal padding */
+    background-color: var(--color-surface); /* Card surface */
+    border: var(--border-width) solid var(--color-border); /* Subtle border */
+    border-radius: var(--radius-lg); /* 12px card radius */
+    box-shadow: var(--shadow-sm); /* Default card shadow */
+    transition:
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast); /* Smooth hover effect */
+}
+
+.station-card:hover {
+    box-shadow: var(--shadow-md); /* Elevated shadow on hover */
+    border-color: var(--color-border-hover); /* Darker border on hover */
+}
+
+/* ── Header ── */
+
+.station-card__header {
+    display: flex; /* Flex layout */
+    justify-content: space-between; /* Name left, favorite right */
+    align-items: flex-start; /* Align to top */
+    gap: var(--space-sm); /* 8px gap */
+}
+
+.station-card__identity {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack brand, name, address */
+    gap: var(--space-2xs); /* 2px tight gap */
+    min-width: 0; /* Allow text truncation */
+}
+
+.station-card__brand {
+    font-size: var(--font-size-xs); /* 12px small text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    color: var(--color-primary); /* Brand color */
+    text-transform: uppercase; /* Uppercase brand */
+    letter-spacing: var(--letter-spacing-wide); /* Wide tracking */
+}
+
+.station-card__name {
+    font-size: var(--font-size-lg); /* 20px heading */
+    font-weight: var(--font-weight-semi); /* Semi-bold */
+    color: var(--color-text); /* Primary text */
+    line-height: var(--line-height-tight); /* 1.25 tight */
+    margin: 0; /* Reset heading margin */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Ellipsis for long names */
+    white-space: nowrap; /* Single line */
+}
+
+.station-card__address {
+    font-size: var(--font-size-sm); /* 14px secondary text */
+    color: var(--color-text-secondary); /* Muted color */
+    margin: 0; /* Reset margin */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Ellipsis for long addresses */
+    white-space: nowrap; /* Single line */
+}
+
+/* ── Favorite Button ── */
+
+.station-card__favorite {
+    flex-shrink: 0; /* Don't shrink */
+    width: var(--button-height-sm); /* 40px square */
+    height: var(--button-height-sm); /* 40px square */
+    display: flex; /* Center heart */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: var(--font-size-xl); /* 24px heart icon */
+    color: var(--color-text-muted); /* Muted default color */
+    background: none; /* Transparent background */
+    border: none; /* No border */
+    border-radius: var(--radius-full); /* Circle shape */
+    cursor: pointer; /* Pointer cursor */
+    transition:
+        color var(--transition-fast),
+        background-color var(--transition-fast); /* Smooth hover */
+}
+
+.station-card__favorite:hover {
+    color: var(--color-danger); /* Red on hover */
+    background-color: var(--color-danger-light); /* Light red background */
+}
+
+.station-card__favorite--active {
+    color: var(--color-danger); /* Red when favorited */
+}
+
+.station-card__favorite:focus-visible {
+    box-shadow: var(--shadow-focus); /* Focus ring */
+    outline: none; /* Remove default outline */
+}
+
+/* ── Body ── */
+
+.station-card__body {
+    display: flex; /* Flex layout */
+    align-items: center; /* Align vertically */
+    justify-content: space-between; /* Price left, score right */
+    gap: var(--space-md); /* 16px gap */
+}
+
+.station-card__price-section {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Stack fuel type + price */
+    gap: var(--space-2xs); /* 2px gap */
+}
+
+.station-card__fuel-type {
+    font-size: var(--font-size-xs); /* 12px small label */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    color: var(--color-text-muted); /* Muted color */
+    text-transform: uppercase; /* Uppercase label */
+    letter-spacing: var(--letter-spacing-wide); /* Wide tracking */
+}
+
+.station-card__price {
+    font-size: var(--font-size-2xl); /* 32px large price */
+    font-weight: var(--font-weight-bold); /* Bold weight */
+    font-family: var(--font-numeric); /* Numeric font */
+    font-variant-numeric: var(--font-variant-price); /* Tabular nums */
+    color: var(--color-text); /* Primary text */
+    line-height: var(--line-height-tight); /* 1.25 tight */
+}
+
+.station-card__score {
+    flex-shrink: 0; /* Don't shrink score badge */
+}
+
+/* ── Footer ── */
+
+.station-card__footer {
+    display: flex; /* Flex layout */
+    align-items: center; /* Align vertically */
+    justify-content: space-between; /* Distance left, status right */
+    gap: var(--space-sm); /* 8px gap */
+    padding-top: var(--space-sm); /* 8px top padding */
+    border-top: var(--border-width) solid var(--color-border); /* Separator line */
+}
+
+.station-card__distance {
+    font-size: var(--font-size-sm); /* 14px text */
+    color: var(--color-text-secondary); /* Secondary text */
+}
+
+/* ── Status Badge ── */
+
+.station-card__status {
+    font-size: var(--font-size-xs); /* 12px small text */
+    font-weight: var(--font-weight-medium); /* Medium weight */
+    padding: var(--space-2xs) var(--space-sm); /* 2px 8px padding */
+    border-radius: var(--radius-full); /* Pill shape */
+}
+
+.station-card__status--open {
+    color: var(--color-success-contrast); /* Success text */
+    background-color: var(--color-success-light); /* Success background */
+}
+
+.station-card__status--closed {
+    color: var(--color-danger-contrast); /* Danger text */
+    background-color: var(--color-danger-light); /* Danger background */
+}
