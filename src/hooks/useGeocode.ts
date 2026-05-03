@@ -55,7 +55,14 @@ export function useGeocode(): UseGeocodeResult {
         const photonResults: PhotonResult[] = await photonSearchLocation(query);
         // Only update if the query is still current
         if (activeQueryRef.current === query) {
-          setResults(photonResults.slice(0, 5));
+          /* Deduplicate by name — same city can appear as node, way, relation */
+          const seen = new Set<string>();
+          const unique = photonResults.filter((result) => {
+            if (seen.has(result.name)) return false; // Skip duplicate name
+            seen.add(result.name); // Mark name as seen
+            return true;
+          });
+          setResults(unique.slice(0, 5)); // Max 5 unique results
           setError(null);
         }
       } catch {
